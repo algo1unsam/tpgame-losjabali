@@ -1,10 +1,10 @@
-# Nombre del juego (<- borrar y completar)
+# Atrapa al Jabalí
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Estevez, Gonzalo
+- Narvaez, Agustín
+- Venturini, Tomás
 
 ## Capturas
 
