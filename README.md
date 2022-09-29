@@ -17,6 +17,6 @@
 
 ## Otros
 
-- Curso/Facultad
+- Algoritmos I, Universidad Nacional de San Martín
 - Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Una vez terminado, no tenemos problemas en que el repositorio sea público
