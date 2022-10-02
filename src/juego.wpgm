@@ -4,5 +4,4 @@ import juego.*
 program jabali{
 	juego.configurar()
 	juego.iniciar()
-	game.start()
 }
