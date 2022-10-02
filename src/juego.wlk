@@ -1,6 +1,6 @@
 import wollok.game.*
 import guardia.*
-import jabali.*
+import Jabali.*
 	
 object juego {
 	method configurar(){
