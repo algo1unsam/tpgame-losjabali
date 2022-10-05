@@ -2,28 +2,43 @@ import wollok.game.*
 import juego.*
 	
 class Jabali{
+	//* Usamos ID para identificar que Jabalí está atrapado por el guardoa
 	var property id = 0
+	
+	// Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = juego.posicionAleatoria()
-	method move(){
-		var newPosition = game.at(position.x() + (-1).randomUpTo(1),position.y() + (-1).randomUpTo(1))
-		if (self.isValidPosition(newPosition)){
-			position = newPosition
-		}
-		else{
-			self.move()
-		}
-		 
-	}
-	method isValidPosition(newPosition){
-		return (newPosition.x().between(0, game.width())) and (newPosition.y().between(0,game.height()))
-	}
-
+	
+	//* Imagen del Jabalí, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(jabali)
 	method image() = "static/img/jabali.png"
-	method spawn(){
+	
+	// ### Métodos de movimiento ###
+	
+	// - Reestablece a aleatoria la posición del Jabalí
+	method posicionAleatoria(){
 		position = juego.posicionAleatoria()
 	}
+	
+
+	
+	// - Método que mueve al Jabalí de lugar
+	method mover(){
+		// 1- Genera una nueva posición aleatoria entre (-1,-1) y (1,1) en los ejes (x,y)
+		var nuevoMovimiento = game.at(position.x() + (-1).randomUpTo(1),position.y() + (-1).randomUpTo(1))
+
+		// 2- Chequea si el próximo movimiento es adentro del mapa
+		if (juego.posicionValida(nuevoMovimiento)){
+			// 2.1- Si se mueve, reemplaza la posición del Jabalí por el nuevo movimiento
+			position = nuevoMovimiento
+		}else{
+			// 2.2- Si la posición no es correcta, vuelve a ejecutar la función hasta que haya una posición correcta
+			self.mover()
+		} 
+	}
+
 }
 
+
+// Creamos 4 jabalís para los 4 Niveles con sus id
 const jaba1 = new Jabali(id = 1)
 const jaba2 = new Jabali(id = 2)
 const jaba3 = new Jabali(id = 3)
