@@ -1,7 +1,9 @@
 import wollok.game.*
 import guardia.*
 import Jabali.*
-	
+import utilidades.*
+
+
 object juego {
 	
 	// Jabalies del juego
@@ -25,6 +27,7 @@ object juego {
 	
 	// 2- Inicia el juego
 	method iniciar(){
+		
 		self.iniciarNivel()
 		game.start()
 	}
@@ -32,6 +35,7 @@ object juego {
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
 		game.clear()
+		vidas.crearCorazones()
 		game.addVisualCharacterIn(guardia, game.center())
 			
 		// Limpia el array de los jabalís atrapados por el guardia
@@ -44,13 +48,11 @@ object juego {
 		game.onTick(100,"El jabali se mueve",{self.moverJabalies()})
 		
 		// Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
-		game.onCollideDo(guardia,{jabali => self.unJabaliEsAtrapado(jabali)})
+		game.onCollideDo(guardia,{jabali => guardia.atrapaAlJabali(jabali)})
 	}
 	
 	// 3.3- Es ejecutado cuando se atrapa un Jabali
 	method unJabaliEsAtrapado(jabali){
-		// El guardia atrapa al Jabali
-		guardia.atrapaAlJabali(jabali)
 		
 		// Chequea si todos los Jabali estan atrapados
 		if(self.todosAtrapados()){
@@ -61,7 +63,6 @@ object juego {
 				self.ganar()
 			}else{
 				// Sino, inicia un nuevo nivel
-
 				self.iniciarNivel()
 			}
 		}
@@ -76,6 +77,8 @@ object juego {
 		// Muestra mensaje
 		game.say(guardia,'VAMOOOO')
 	}
+	
+
 	
 // #############################################
 // ##### FUNCIONES DE CONTROL DEL JABALIES #####
@@ -117,3 +120,5 @@ object juego {
 	}
 
 }
+
+
