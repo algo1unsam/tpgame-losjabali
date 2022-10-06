@@ -23,7 +23,7 @@ class Jabali{
 	// - Método que mueve al Jabalí de lugar
 	method mover(){
 		// 1- Genera una nueva posición aleatoria entre (-1,-1) y (1,1) en los ejes (x,y)
-		var nuevoMovimiento = game.at(position.x() + (-1).randomUpTo(1),position.y() + (-1).randomUpTo(1))
+		const nuevoMovimiento = game.at(position.x() + (-1).randomUpTo(1),position.y() + (-1).randomUpTo(1))
 
 		// 2- Chequea si el próximo movimiento es adentro del mapa
 		if (tablero.posicionValida(nuevoMovimiento)){
