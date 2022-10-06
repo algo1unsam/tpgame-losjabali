@@ -1,18 +1,18 @@
 import wollok.game.*
 
-// ##########################################
-// ##### FUNCIONES DE VIDAS DEL JUEGO #####
-// ##########################################
+//* ##########################################
+//* ##### FUNCIONES DE VIDAS DEL JUEGO #####
+//* ##########################################
 
 class Corazon{
 	
 	// ID del corazón
 	const property id = 0
 	
-	// Determina si el corazón está o no lleno
+	//* Determina si el corazón está o no lleno
 	var property lleno = true
 	
-	// Posición en X e Y del corazón
+	//* Posición en X e Y del corazón
 	var posicionX = 1
 	var posicionY = game.height()-1
 	
@@ -44,6 +44,7 @@ const vida3 = new Corazon(id=2,posicionX=3)
 
 //* Objeto que maneja las vidas
 object vidas{
+
 	const vidas=[vida1,vida2,vida3]
 	
 	method perderVida(){
@@ -53,5 +54,4 @@ object vidas{
 	method crearCorazones(){
 		vidas.forEach({vida=>game.addVisual(vida)})	
 	}
-	
 }

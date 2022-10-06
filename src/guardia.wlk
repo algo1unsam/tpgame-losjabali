@@ -13,7 +13,7 @@ object guardia{
 	}
 	
 	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
-	method image() = "static/img/guardia.png"
+	method image() = "static/img/persojaes/guardia.png"
 	
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
 	method atrapaAlJabali(jabali){

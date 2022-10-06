@@ -44,7 +44,7 @@ object juego {
 		self.crearJabalies()
 		
 		// Cada 100 ms, el Jabalí se mueve
-		game.onTick(100,"El jabali se mueve",{self.moverJabalies()})
+		game.onTick(jabali.frecuenciaDeMovimiento(),"El jabali se mueve",{self.moverJabalies()})
 		
 		// Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
 		game.onCollideDo(guardia,{jabali => self.unJabaliEsAtrapado(jabali)})
@@ -155,7 +155,7 @@ object tablero{
 	method configurar(){
 		game.width(self.ancho())
   		game.height(self.alto())
-  		game.boardGround("static/img/tornavias.png")
+  		game.boardGround("static/img/fondos/tornavias.png")
 	}
 	
 	// 6- Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa

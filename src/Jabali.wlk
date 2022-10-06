@@ -4,16 +4,20 @@ import juego.*
 class Jabali{
 	//* Usamos ID para identificar que Jabalí está atrapado por el guardoa
 	var property id = 0
-	
-	// Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
+
+	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = tablero.posicionAleatoria()
-	
+	var property velocidad = 1
+
 	//* Imagen del Jabalí, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(jabali)
-	method image() = "static/img/jabali.png"
+	method image() = "static/img/persojanes/jabali.png"
 	
-	// ### Métodos de movimiento ###
+
+	//* ### Métodos de movimiento ###
 	
-	// - Reestablece a aleatoria la posición del Jabalí
+	method frecuenciaDeMovimiento() = 100/velocidad
+
+	//* - Reestablece a aleatoria la posición del Jabalí
 	method resetearPosicion(){
 		position = tablero.posicionAleatoria()
 	}

@@ -4,6 +4,7 @@ import menus.*
 import guardia.*
 
 /*
+!FIXME: HAY QUE ADAPTARLO A NUESTRO JUEGO, ELIMINE LAS TECLAS DEL GUARDIA PORQUE NO HACEN FALTA
 object teclado {
 
 	method configurarTeclasMenuInicial() {		
@@ -23,4 +24,5 @@ object teclado {
 		keyboard.alt().onPressDo({ juego.finalizarJuego()})
 	}
 }
- FIXME: HAY QUE ADAPTARLO A NUESTRO JUEGO, ELIMINE LAS TECLAS DEL GUARDIA PORQUE NO HACEN FALTA*/
+ 
+ */
