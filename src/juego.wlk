@@ -17,11 +17,9 @@ object juego {
 	
 	// 1- Configura el ancho, alto, tamaño de celda, título y fondo 
 	method configurar(){
-		game.width(25)
-  		game.height(20)
+		tablero.configurar()
   		game.cellSize(40)
   		game.title("Atrapa El Jabali ")	
-  		game.boardGround("static/img/tornavias.png")
   		
 	}
 	
@@ -35,6 +33,8 @@ object juego {
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
 		game.clear()
+		game.addVisualCharacter(guardia)
+		reloj.iniciar()
 		vidas.crearCorazones()
 		game.addVisualCharacterIn(guardia, game.center())
 			
@@ -48,7 +48,11 @@ object juego {
 		game.onTick(100,"El jabali se mueve",{self.moverJabalies()})
 		
 		// Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
-		game.onCollideDo(guardia,{jabali => guardia.atrapaAlJabali(jabali)})
+		game.onCollideDo(guardia,{jabali => self.unJabaliEsAtrapado(jabali)})
+		
+		// Si el tiempo se agota, se pierde el juego
+		game.onTick(100,"Chequear tiempo",{self.chequearTiempo()})
+
 	}
 	
 	// 3.3- Es ejecutado cuando se atrapa un Jabali
@@ -67,13 +71,27 @@ object juego {
 			}
 		}
 	}
-	
-	// 4- Lo que sucede cuando se gana
-	method ganar(){
+	method posicionFinal(){
 		// Limpia el mapa
 		game.clear()
 		// Lleva al guardia al centro
 		game.addVisualIn(guardia,game.center())
+	}
+	
+	method perder(){
+		self.posicionFinal()
+		// Muestra mensaje
+		game.say(guardia,'NOOOOO')
+	}
+	method chequearTiempo(){
+		if (reloj.tiempo() <= 0){
+			self.perder()
+		}
+	}
+	
+	// 4- Lo que sucede cuando se gana
+	method ganar(){
+		self.posicionFinal()
 		// Muestra mensaje
 		game.say(guardia,'VAMOOOO')
 	}
@@ -87,26 +105,17 @@ object juego {
 	// 3.1- Spawnea los jabalies en el mapa
 	method crearJabalies(){
 		// Reinicia la posición de los Jabalí
-		jabalies.take(nivel).forEach({jabali => jabali.posicionAleatoria()})
+		jabalies.take(nivel).forEach({jabali => jabali.resetearPosicion()})
 		
 		// Los muestra
 		jabalies.take(nivel).forEach({jabali => game.addVisual(jabali)})
 	}
-	
-	// 3.1.1- Muestra una nueva posición aleatoria dentro del juego
-	method posicionAleatoria() = game.at(0.randomUpTo(game.width()),0.randomUpTo(game.height()))
 	
 	// 3.2- Mueve los jabalies
 	method moverJabalies(){ 
 		jabalies.take(nivel).forEach({jabali => jabali.mover()})
 	}
 	
-	// 6- Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa
-	method posicionValida(nuevaPosicion){
-		const nuevaPosicionEnX = (nuevaPosicion.x().between(0, game.width()))
-		const nuevaPosicionEnY = (nuevaPosicion.y().between(0,game.height()))
-		return nuevaPosicionEnX and nuevaPosicionEnY 
-	}
 	
 	// 3.3.1- Chequea si están todos los jabalies atrapados
 	method todosAtrapados(){
@@ -118,7 +127,48 @@ object juego {
 		 
 		return idsOrdenados == todosLosJabalies
 	}
+	
 
+}
+
+object reloj{
+	var property tiempo = 120
+	
+	method text() = tiempo.toString()
+	method pasarTiempo() {
+		tiempo -= 1
+	}
+	method iniciar(){
+		tiempo = 120
+		game.addVisualIn(self,game.at(game.width()-2,game.height()-2))
+		game.onTick(100,"tiempo",{self.pasarTiempo()})
+	}
+	method detener(){
+		game.removeTickEvent("tiempo")
+	}
+}
+
+object tablero{
+	const property alto = 20
+	const property ancho = 25
+	const property altoMenu = 3
+	
+	method configurar(){
+		game.width(self.ancho())
+  		game.height(self.alto())
+  		game.boardGround("static/img/tornavias.png")
+	}
+	
+	// 6- Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa
+	method posicionValida(nuevaPosicion){
+		const nuevaPosicionEnX = (nuevaPosicion.x().between(0, game.width()))
+		const nuevaPosicionEnY = (nuevaPosicion.y().between(0,game.height()- altoMenu))
+		return nuevaPosicionEnX and nuevaPosicionEnY 
+	}
+	
+	// 3.1.1- Muestra una nueva posición aleatoria dentro del juego
+	method posicionAleatoria() = game.at(0.randomUpTo(game.width()),0.randomUpTo(game.height()- altoMenu))
+	
 }
 
 
