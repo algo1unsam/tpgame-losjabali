@@ -3,7 +3,7 @@ import juego.*
 import menus.*
 import guardia.*
 
-
+/*
 object teclado {
 
 	method configurarTeclasMenuInicial() {		
@@ -22,16 +22,5 @@ object teclado {
 		// Tecla Finalizar Juego
 		keyboard.alt().onPressDo({ juego.finalizarJuego()})
 	}
-
-	method configurarTeclasPersonajes() {
-		// Teclas Izquierda
-		keyboard.left().onPressDo{ guardia.mover(izquierda)}
-		// Teclas Derecha
-		keyboard.right().onPressDo{ guardia.mover(derecha)}
-		//Tecla arriba
-		keyboard.up().onPressDo{ guardia.mover(arriba)}
-		//Tecla abajo
-		keyboard.down().onPressDo{ guardia.mover(abajo)}
-		// Teclas de Accion
-	}
 }
+ FIXME: HAY QUE ADAPTARLO A NUESTRO JUEGO, ELIMINE LAS TECLAS DEL GUARDIA PORQUE NO HACEN FALTA*/

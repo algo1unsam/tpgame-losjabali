@@ -1,5 +1,6 @@
 import wollok.game.*
 import teclado.*
+/* 
 //SE CREA UNA CLASE PARA PODEER AGREGAR LO ELEMENTOS AL MENU 
 class ElementoVisible {
 
@@ -95,3 +96,4 @@ object menuFinal inherits Menu {
 	}
 
 }
+FIXME: HAY QUE CORREGIR LOS NOMBRES DE LOS METODOS, NO COINCIDEN CON LOS DECLARADOS EN ESTE JUEGO. ESTA ROMPIENDO POR ESO */

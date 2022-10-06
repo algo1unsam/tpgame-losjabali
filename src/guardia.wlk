@@ -19,7 +19,6 @@ object guardia{
 	method atrapaAlJabali(jabali){
 		atrapados.add(jabali)
 		game.removeVisual(jabali)
-		juego.unJabaliEsAtrapado(jabali)
 	}
 	
 	method ordenarJabalies(){
