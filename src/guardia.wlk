@@ -1,8 +1,16 @@
 import wollok.game.*
+import juego.*
 
 object guardia{
 	
 	var property atrapados = []
+	var property position = game.center()
+	
+	method position(nuevaPosicion){
+		if (tablero.posicionValida(nuevaPosicion)){
+			position = nuevaPosicion
+		} 
+	}
 	
 	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
 	method image() = "static/img/guardia.png"
