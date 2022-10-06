@@ -36,7 +36,6 @@ object juego {
 		game.addVisualCharacter(guardia)
 		reloj.iniciar()
 		vidas.crearCorazones()
-		game.addVisualCharacterIn(guardia, game.center())
 			
 		// Limpia el array de los jabalís atrapados por el guardia
 		guardia.atrapados().clear()
@@ -57,7 +56,7 @@ object juego {
 	
 	// 3.3- Es ejecutado cuando se atrapa un Jabali
 	method unJabaliEsAtrapado(jabali){
-		
+		guardia.atrapaAlJabali(jabali)
 		// Chequea si todos los Jabali estan atrapados
 		if(self.todosAtrapados()){
 			// Si lo están, sube de nivel
