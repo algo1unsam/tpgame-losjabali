@@ -1,4 +1,4 @@
-# Atrapa al Jabalí
+# Atrapa al Jabalí :cop: :boar:
 
 ## Equipo de desarrollo
 
@@ -11,8 +11,8 @@
 (agregar)
 
 ## Reglas de Juego / Instrucciones
-
-(Escribirlas)
+Atrapa todos los Jabalí que te vayan apareciendo antes del minuto.
+Amedida que subas de nivel, irán apareciendo mas y más Jabalíes!
 
 
 ## Otros
