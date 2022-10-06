@@ -1,7 +1,7 @@
 import wollok.game.*
 
 //* ##########################################
-//* ##### FUNCIONES DE VIDAS DEL JUEGO #####
+//* ###### FUNCIONES DE VIDAS DEL JUEGO ######
 //* ##########################################
 
 class Corazon{
@@ -53,5 +53,26 @@ object vidas{
 	
 	method crearCorazones(){
 		vidas.forEach({vida=>game.addVisual(vida)})	
+	}
+}
+
+//* ##########################################
+//* ###### FUNCIONES DE RELOJ DE JUEGO ######
+//* ##########################################
+
+object reloj{
+	var property tiempo = 120
+	
+	method text() = tiempo.toString()
+	method pasarTiempo() {
+		tiempo -= 1
+	}
+	method iniciar(){
+		tiempo = 120
+		game.addVisualIn(self,game.at(game.width()-2,game.height()-2))
+		game.onTick(100,"tiempo",{self.pasarTiempo()})
+	}
+	method detener(){
+		game.removeTickEvent("tiempo")
 	}
 }

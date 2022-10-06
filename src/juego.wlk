@@ -130,22 +130,7 @@ object juego {
 
 }
 
-object reloj{
-	var property tiempo = 120
-	
-	method text() = tiempo.toString()
-	method pasarTiempo() {
-		tiempo -= 1
-	}
-	method iniciar(){
-		tiempo = 120
-		game.addVisualIn(self,game.at(game.width()-2,game.height()-2))
-		game.onTick(100,"tiempo",{self.pasarTiempo()})
-	}
-	method detener(){
-		game.removeTickEvent("tiempo")
-	}
-}
+
 
 object tablero{
 	const property alto = 20
