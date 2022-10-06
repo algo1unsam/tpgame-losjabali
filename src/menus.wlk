@@ -1,5 +1,6 @@
 import wollok.game.*
 import teclado.*
+
 //* SE CREA UNA CLASE PARA PODEER AGREGAR LO ELEMENTOS AL MENU
 //!!!	Agus: Me parece que esto estaría bueno pasarlo a utilidades.wlk, y ahí exportamos el método a TODOS los
 //!!!		elementos  visibles como por ejemplo Jabalí, Guardia, Fondos, etc. Todos tienen img, position, mostrar, 
@@ -23,34 +24,23 @@ class ElementoVisible {
 //* ### ELEMENTOS DE TODOS LOS MENUS ###
 //* ####################################
 
-//* Fondo de pantalla
-object titulo inherits ElementoVisible(image = "ATRAPA EL JABALI.png", position = game.at(0, game.height()).down(5)) {
-
-}
+//* Titulo del juego
+//object titulo inherits ElementoVisible(image = "ATRAPA EL JABALI.png", position = game.at(0, game.height()).down(5)) {}
 
 //* Botón de start
-object iniciar inherits ElementoVisible(image = "start.png", position = game.at(0, game.height()).down(8)) {
-
-}
+object iniciar inherits ElementoVisible(image = "static/menu/cartelIniciar.png", position = game.at(0, game.height()).down(8)) {}
 
 //* Imagen de teclas
-object teclas inherits ElementoVisible(image = "keys.png", position = game.at(0, game.height()).down(8)) {
-
-}
+//object teclas inherits ElementoVisible(image = "keys.png", position = game.at(0, game.height()).down(8)) {}
 
 //* Cartel de Game Over
-object juegoTerminado inherits ElementoVisible(image = "game_over.png", position = game.at(0, game.height()).down(5)) {
-
-}
+//object juegoTerminado inherits ElementoVisible(image = "game_over.png", position = game.at(0, game.height()).down(5)) {}
 
 //* Botón de Restart
-object reiniciar inherits ElementoVisible(image = "restart.png", position = gameOver.position().down(8)) {
+//object reiniciar inherits ElementoVisible(image = "restart.png", position = gameOver.position().down(8)) {}
 
-}
 //* Botón de Exit
-object salir inherits ElementoVisible(image = "exit.png", position = start.position().down(1)) {
-
-}
+object salir inherits ElementoVisible(image = "static/menu/cartelSalir.png", position = iniciar.position().down(1)) {}
 
 //* #############################
 //* ### CLASE DE MENU GENERAL ###
@@ -59,9 +49,7 @@ class Menu {
 
 	method agregarOpciones()
 
-	method iniciar() {
-		self.agregarOpciones()
-	}
+	method iniciar() { self.agregarOpciones() }
 
 }
 
@@ -69,14 +57,14 @@ class Menu {
 object menuInicial inherits Menu {
 
 	override method agregarOpciones() {
-		title.mostrar()
-		start.mostrar()
-		exit.mostrar()
+		// titulo.mostrar()
+		iniciar.mostrar()
+		salir.mostrar()
 	}
 
 	override method iniciar() {
 		super()
-		teclado.configurarTeclasMenuInicial()
+		//teclado.configurarTeclasMenuInicial()
 	}
 }
 
@@ -91,13 +79,13 @@ object menuInicial inherits Menu {
 object menuInstruccionesTeclas inherits Menu {
 
 	override method agregarOpciones() {
-		keys.mostrar()
-		start.mostrar()
+		//teclas.mostrar()
+		iniciar.mostrar()
 	}
 
 	override method iniciar() {
 		super()
-		teclado.configurarTeclaContinuar()
+		//teclado.configurarTeclaContinuar()
 	}
 
 }
@@ -107,14 +95,14 @@ object menuInstruccionesTeclas inherits Menu {
 object menuFinal inherits Menu {
 
 	override method agregarOpciones() {
-		gameOver.mostrar()
-		restart.mostrar()
-		exit.mostrar()
+		//finJuego.mostrar()
+		//restart.mostrar()
+		salir.mostrar()
 	}
 
 	override method iniciar() {
 		super()
-		teclado.configurarTeclasMenuFinal()
+		//teclado.configurarTeclasMenuFinal()
 	}
 
 }

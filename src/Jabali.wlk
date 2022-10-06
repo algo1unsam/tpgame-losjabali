@@ -1,6 +1,6 @@
 import wollok.game.*
 import juego.*
-	
+import tablero.*
 class Jabali{
 	//* Usamos ID para identificar que Jabalí está atrapado por el guardoa
 	var property id = 0
@@ -10,7 +10,7 @@ class Jabali{
 	var property velocidad = 1
 
 	//* Imagen del Jabalí, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(jabali)
-	method image() = "static/img/persojanes/jabali.png"
+	method image() = "static/img/personajes/jabali.png"
 	
 
 	//* ### Métodos de movimiento ###

@@ -11,16 +11,15 @@ object juego {
 	// Nivel del juego
 	var property nivel = 1
 	
-// ##########################################
-// ##### FUNCIONES DE CONTROL DEL JUEGO #####
-// ##########################################
+//* ##########################################
+//* ##### FUNCIONES DE CONTROL DEL JUEGO #####
+//* ##########################################
 	
 	// 1- Configura el ancho, alto, tamaño de celda, título y fondo 
 	method configurar(){
 		tablero.configurar()
-  		game.cellSize(40)
-  		game.title("Atrapa El Jabali ")	
   		
+  		game.title("Atrapa El Jabali ")	
 	}
 	
 	// 2- Inicia el juego
@@ -32,29 +31,35 @@ object juego {
 	
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
-		game.clear()
-		game.addVisualCharacter(guardia)
+		//* 3.1-  Limpia el tablero
+		tablero.limpiarTablero()
+
+		//* 3.2- Agrega al guardia
+		tablero.agregarPersonajeMobible(guardia)
+
+		//* 3.3- Inicia el reloj
 		reloj.iniciar()
+
+		//* 3.4- Crea las vidas
 		vidas.crearCorazones()
-			
-		// Limpia el array de los jabalís atrapados por el guardia
+		//* 3.5- Limpia el array de los jabalís atrapados por el guardia
 		guardia.atrapados().clear()
 		
-		// Crea los jabalies 
+		//* 3.5- Crea los jabalies 
 		self.crearJabalies()
 		
-		// Cada 100 ms, el Jabalí se mueve
-		game.onTick(jabali.frecuenciaDeMovimiento(),"El jabali se mueve",{self.moverJabalies()})
+		//* 3.6-  Cada 100 ms, el Jabalí se mueve
+		game.onTick(100,"El jabali se mueve",{self.moverJabalies()})
 		
-		// Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
+		//* 3.7- Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
 		game.onCollideDo(guardia,{jabali => self.unJabaliEsAtrapado(jabali)})
 		
-		// Si el tiempo se agota, se pierde el juego
+		//* 3.8- Si el tiempo se agota, se pierde el juego
 		game.onTick(100,"Chequear tiempo",{self.chequearTiempo()})
 
 	}
 	
-	// 3.3- Es ejecutado cuando se atrapa un Jabali
+	//* 4- Es ejecutado cuando se atrapa un Jabali
 	method unJabaliEsAtrapado(jabali){
 		guardia.atrapaAlJabali(jabali)
 		// Chequea si todos los Jabali estan atrapados
@@ -70,6 +75,21 @@ object juego {
 			}
 		}
 	}
+
+	//* 5- Chequea el tiempo
+	method chequearTiempo(){
+		if (reloj.tiempo() <= 0){
+			self.perder()
+		}
+	}
+
+	method perder(){
+		self.posicionFinal()
+		// Muestra mensaje
+		game.say(guardia,'NOOOOO')
+	}
+
+	//* 6- Reinicializa la posición del guardia
 	method posicionFinal(){
 		// Limpia el mapa
 		game.clear()
@@ -77,16 +97,8 @@ object juego {
 		game.addVisualIn(guardia,game.center())
 	}
 	
-	method perder(){
-		self.posicionFinal()
-		// Muestra mensaje
-		game.say(guardia,'NOOOOO')
-	}
-	method chequearTiempo(){
-		if (reloj.tiempo() <= 0){
-			self.perder()
-		}
-	}
+
+
 	
 	// 4- Lo que sucede cuando se gana
 	method ganar(){

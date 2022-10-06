@@ -13,12 +13,12 @@ class Corazon{
 	var property lleno = true
 	
 	//* Posición en X e Y del corazón
-	var posicionX = 1
-	var posicionY = game.height()-1
+	const posicionX = 1
+	const posicionY = game.height()-1
 	
 	
 	//* Imagen y getter del corazón que representa la vida
-	var image = "static/img/corazonLleno.png" 
+	var image = "static/img/utilidades/corazonLleno.png" 
 	method image() = image
 
 	//* Posición
@@ -26,7 +26,7 @@ class Corazon{
 	
 	//* Cambia la imagen del corazón por una de corazón vacío
 	method vaciarCorazon(){
-		image = "static/img/corazonVacio.png"
+		image = "static/img/utilidades/corazonVacio.png"
 		lleno=false
 	}
 
@@ -54,6 +54,8 @@ object vidas{
 	method crearCorazones(){
 		vidas.forEach({vida=>game.addVisual(vida)})	
 	}
+	
+	method chequearVidas()= vidas.forEach({vida=>vida.lleno()})
 }
 
 //* ##########################################
