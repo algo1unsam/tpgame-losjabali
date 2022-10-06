@@ -23,4 +23,4 @@ object teclado {
 		keyboard.alt().onPressDo({ juego.finalizarJuego()})
 	}
 }
- FIXME*/
+ FIXME: HAY QUE ADAPTARLO A NUESTRO JUEGO, ELIMINE LAS TECLAS DEL GUARDIA PORQUE NO HACEN FALTA*/
