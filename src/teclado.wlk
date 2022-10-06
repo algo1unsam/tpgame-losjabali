@@ -22,7 +22,8 @@ object teclado {
 		// Tecla Finalizar Juego
 		keyboard.alt().onPressDo({ juego.finalizarJuego()})
 	}
-
+//! No es necesario
+/* 
 	method configurarTeclasPersonajes() {
 		// Teclas Izquierda
 		keyboard.left().onPressDo{ guardia.mover(izquierda)}
@@ -33,5 +34,5 @@ object teclado {
 		//Tecla abajo
 		keyboard.down().onPressDo{ guardia.mover(abajo)}
 		// Teclas de Accion
-	}
+	} */
 }
