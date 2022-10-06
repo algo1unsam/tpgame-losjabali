@@ -1,4 +1,5 @@
 import wollok.game.*
+import juego.*
 
 object guardia{
 	
@@ -10,7 +11,8 @@ object guardia{
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
 	method atrapaAlJabali(jabali){
 		atrapados.add(jabali)
-		game.removeVisual(jabali) 
+		game.removeVisual(jabali)
+		juego.unJabaliEsAtrapado(jabali)
 	}
 	
 	method ordenarJabalies(){
