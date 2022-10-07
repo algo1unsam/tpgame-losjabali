@@ -44,19 +44,20 @@ object juego {
 
 		//* 3.4- Crea las vidas
 		vidas.crearCorazones()
+		
 		//* 3.5- Limpia el array de los jabalís atrapados por el guardia
 		guardia.atrapados().clear()
 		
-		//* 3.5- Crea los jabalies 
+		//* 3.6- Crea los jabalies 
 		self.crearJabalies()
 		
-		//* 3.6-  Cada 100 ms, el Jabalí se mueve
+		//* 3.7-  Cada un determinado tiempo, el Jabalí se mueve
 		game.onTick(self.frecuenciaDeMovimiento(),"El jabali se mueve",{self.moverJabalies()})
 		
-		//* 3.7- Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
+		//* 3.8- Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
 		game.onCollideDo(guardia,{jabali => self.unJabaliEsAtrapado(jabali)})
 		
-		//* 3.8- Si el tiempo se agota, se pierde el juego
+		//* 3.9- Si el tiempo se agota, chequea el tiempo y las vidas
 		game.onTick(100,"Chequear tiempo",{self.chequearTiempo()})
 
 	}
@@ -87,7 +88,7 @@ object juego {
 		//* 5.1-  Si el reloj llegó a cero chequea cuantas vidas tiene
 			if(vidas.chequearVidas()){
 				//* 5.1.1-  Si aún tiene vidas, reinicia el reloj y pierde una vida
-				game.removeVisual(reloj)
+				reloj.detener()
 				reloj.iniciar()
 				vidas.perderVida()			
 			}else{				
@@ -131,7 +132,7 @@ object juego {
 	
 	// 3.1- Spawnea los jabalies en el mapa
 	method crearJabalies(){
-		// Reinicia la posición de los Jabalí
+		// Reinicia la posición de los Jabalies
 		jabalies.take(nivel).forEach({jabali => jabali.resetearPosicion()})
 		
 		// Los muestra

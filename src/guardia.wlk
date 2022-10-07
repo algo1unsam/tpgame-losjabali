@@ -21,6 +21,7 @@ object guardia{
 		game.removeVisual(jabali)
 	}
 	
+	//* Ordena los Jabalies atrapados por ID
 	method ordenarJabalies(){
 		atrapados.sortBy({jabaliA,jabaliB => jabaliA.id()<jabaliB.id()})
 	}

@@ -58,6 +58,10 @@ object vidas{
 	method chequearVidas() = vidas.any({vida=>vida.lleno()})
 }
 
+
+
+
+
 //* ##########################################
 //* ###### FUNCIONES DE RELOJ DE JUEGO ######
 //* ##########################################
@@ -65,20 +69,26 @@ object vidas{
 object reloj{
 	var property tiempo = 120
 	
+	//* Función que toma Wollok para cargar el tiempo
 	method text() = tiempo.toString()
+	//* Función que toma Wollok para cambair el color del texto
 	method textColor() = 'ffffff'
-	
-	method size() = 4
 
+	//* Hace que el tiempo se vaya reduciendo
 	method pasarTiempo() {
 		tiempo -= 1
 	}
+	
+	//* Inicia el contador del reloj
 	method iniciar(){
 		tiempo = 120
 		game.addVisualIn(self,game.at(game.width()-2,game.height()-2))
 		game.onTick(100,"tiempo",{self.pasarTiempo()})
 	}
+	
+	//* Detiene el contador del reloj
 	method detener(){
+		game.removeVisual(reloj)
 		game.removeTickEvent("tiempo")
 	}
 }
