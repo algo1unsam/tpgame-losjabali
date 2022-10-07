@@ -11,6 +11,8 @@ object juego {
 	// Nivel del juego
 	var property nivel = 1
 	
+	var property frecuenciaDeMovimiento = 100/nivel
+	
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
 //* ##########################################
@@ -49,7 +51,7 @@ object juego {
 		self.crearJabalies()
 		
 		//* 3.6-  Cada 100 ms, el Jabalí se mueve
-		game.onTick(100,"El jabali se mueve",{self.moverJabalies()})
+		game.onTick(self.frecuenciaDeMovimiento(),"El jabali se mueve",{self.moverJabalies()})
 		
 		//* 3.7- Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
 		game.onCollideDo(guardia,{jabali => self.unJabaliEsAtrapado(jabali)})
@@ -65,14 +67,15 @@ object juego {
 		guardia.atrapaAlJabali(jabali)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		if(self.todosAtrapados()){
-			// Si lo están, sube de nivel
+			//* 4.2.1- Si lo están, sube de nivel
 			nivel += 1
-	
+
+			//* 4.2.2- Chequea si se llegó al nivel 4
 			if (nivel > 4){
-				// Si supera el nivel 4, ganó el juego
+				//* - Si supera el nivel 4, ganó el juego
 				self.ganar()
 			}else{
-				// Sino, inicia un nuevo nivel
+				//* - Sino, inicia un nuevo nivel
 				self.iniciarNivel()
 			}
 		}
@@ -102,7 +105,7 @@ object juego {
 		game.say(guardia,'NOOOOO')
 	}
 
-	//* 6- Reinicializa la posición del guardia
+	//* 7- Reinicializa la posición del guardia
 	method posicionFinal(){
 		// Limpia el mapa
 		game.clear()
@@ -113,7 +116,7 @@ object juego {
 
 
 	
-	// 4- Lo que sucede cuando se gana
+	//* 8- Lo que sucede cuando se gana
 	method ganar(){
 		self.posicionFinal()
 		// Muestra mensaje
@@ -122,9 +125,9 @@ object juego {
 	
 
 	
-// #############################################
-// ##### FUNCIONES DE CONTROL DEL JABALIES #####
-// #############################################
+//* #############################################
+//* ##### FUNCIONES DE CONTROL DEL JABALIES #####
+//* #############################################
 	
 	// 3.1- Spawnea los jabalies en el mapa
 	method crearJabalies(){

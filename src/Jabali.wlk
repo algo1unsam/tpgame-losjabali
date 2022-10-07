@@ -7,15 +7,15 @@ class Jabali{
 
 	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = tablero.posicionAleatoria()
-	var property velocidad = 1
 
 	//* Imagen del Jabalí, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(jabali)
 	method image() = "static/img/personajes/jabali.png"
 	
-
+	
+	
 	//* ### Métodos de movimiento ###
 	
-	method frecuenciaDeMovimiento() = 100/velocidad
+
 
 	//* - Reestablece a aleatoria la posición del Jabalí
 	method resetearPosicion(){

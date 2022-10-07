@@ -66,6 +66,10 @@ object reloj{
 	var property tiempo = 120
 	
 	method text() = tiempo.toString()
+	method textColor() = 'ffffff'
+	
+	method size() = 4
+
 	method pasarTiempo() {
 		tiempo -= 1
 	}
