@@ -55,7 +55,7 @@ object vidas{
 		vidas.forEach({vida=>game.addVisual(vida)})	
 	}
 	
-	method chequearVidas()= vidas.forEach({vida=>vida.lleno()})
+	method chequearVidas() = vidas.any({vida=>vida.lleno()})
 }
 
 //* ##########################################

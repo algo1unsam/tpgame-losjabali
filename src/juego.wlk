@@ -61,13 +61,15 @@ object juego {
 	
 	//* 4- Es ejecutado cuando se atrapa un Jabali
 	method unJabaliEsAtrapado(jabali){
+		//* 4.1- El guardia atrapa al jabali
 		guardia.atrapaAlJabali(jabali)
-		// Chequea si todos los Jabali estan atrapados
+		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		if(self.todosAtrapados()){
 			// Si lo están, sube de nivel
 			nivel += 1
-			// Si supera el nivel 4, ganó el juego
+	
 			if (nivel > 4){
+				// Si supera el nivel 4, ganó el juego
 				self.ganar()
 			}else{
 				// Sino, inicia un nuevo nivel
@@ -79,11 +81,22 @@ object juego {
 	//* 5- Chequea el tiempo
 	method chequearTiempo(){
 		if (reloj.tiempo() <= 0){
-			self.perder()
+		//* 5.1-  Si el reloj llegó a cero chequea cuantas vidas tiene
+			if(vidas.chequearVidas()){
+				//* 5.1.1-  Si aún tiene vidas, reinicia el reloj y pierde una vida
+				game.removeVisual(reloj)
+				reloj.iniciar()
+				vidas.perderVida()			
+			}else{				
+				//* 5.1.2- Si no tiene vidas. pierde
+				self.perder()
+			}
 		}
 	}
 
+	//* 6 - Perder
 	method perder(){
+		//* Retorna 
 		self.posicionFinal()
 		// Muestra mensaje
 		game.say(guardia,'NOOOOO')
