@@ -60,27 +60,7 @@ object juego {
 		//* 3.9- Si el tiempo se agota, chequea el tiempo y las vidas
 		game.onTick(100,"Chequear tiempo",{self.chequearTiempo()})
 
-	}
-	
-	//* 4- Es ejecutado cuando se atrapa un Jabali
-	method unJabaliEsAtrapado(jabali){
-		//* 4.1- El guardia atrapa al jabali
-		guardia.atrapaAlJabali(jabali)
-		//* 4.2-  Chequea si todos los Jabali estan atrapados
-		if(self.todosAtrapados()){
-			//* 4.2.1- Si lo están, sube de nivel
-			nivel += 1
-
-			//* 4.2.2- Chequea si se llegó al nivel 4
-			if (nivel > 4){
-				//* - Si supera el nivel 4, ganó el juego
-				self.ganar()
-			}else{
-				//* - Sino, inicia un nuevo nivel
-				self.iniciarNivel()
-			}
-		}
-	}
+	} 
 
 	//* 5- Chequea el tiempo
 	method chequearTiempo(){
@@ -128,7 +108,7 @@ object juego {
 //* ##### FUNCIONES DE CONTROL DEL JABALIES #####
 //* #############################################
 	
-	// 3.1- Spawnea los jabalies en el mapa
+	// - Spawnea los jabalies en el mapa
 	method crearJabalies(){
 		// Reinicia la posición de los Jabalies
 		jabalies.take(nivel).forEach({jabali => jabali.resetearPosicion()})
@@ -137,13 +117,33 @@ object juego {
 		jabalies.take(nivel).forEach({jabali => game.addVisual(jabali)})
 	}
 	
-	// 3.2- Mueve los jabalies
+	// - Mueve todos los jabalies 1 lugar en sentido aleatorio
 	method moverJabalies(){ 
 		jabalies.take(nivel).forEach({jabali => jabali.mover()})
 	}
 	
 	method ordenarJabalies(){
 		jabalies.sortBy({jabaliA,jabaliB => jabaliA.identity()<jabaliB.identity()})
+	}
+	
+	//* - Es ejecutado cuando se atrapa un Jabali
+	method unJabaliEsAtrapado(jabali){
+		//* 4.1- El guardia atrapa al jabali
+		guardia.atrapaAlJabali(jabali)
+		//* 4.2-  Chequea si todos los Jabali estan atrapados
+		if(self.todosAtrapados()){
+			//* 4.2.1- Si lo están, sube de nivel
+			nivel += 1
+
+			//* 4.2.2- Chequea si se llegó al nivel 4
+			if (nivel > 4){
+				//* - Si supera el nivel 4, ganó el juego
+				self.ganar()
+			}else{
+				//* - Sino, inicia un nuevo nivel
+				self.iniciarNivel()
+			}
+		}
 	}
 	
 	// 3.3.1- Chequea si están todos los jabalies atrapados
