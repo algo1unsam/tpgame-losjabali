@@ -3,8 +3,7 @@ import juego.*
 import tablero.*
 class Jabali{
 	
-	//* Usamos ID para identificar que Jabalí está atrapado por el guardoa
-	var property id = 0
+	//* Usamos la propiedad .identity() para identificar que Jabalí está atrapado por el guardia
 
 	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = tablero.posicionAleatoria()
@@ -36,7 +35,8 @@ class Jabali{
 
 
 // Creamos 4 jabalís para los 4 Niveles con sus id
-const jaba1 = new Jabali(id = 1)
-const jaba2 = new Jabali(id = 2)
-const jaba3 = new Jabali(id = 3)
-const jaba4 = new Jabali(id = 4)
+const jaba1 = new Jabali()
+const jaba2 = new Jabali()
+const jaba3 = new Jabali()
+const jaba4 = new Jabali()
+

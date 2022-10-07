@@ -23,7 +23,7 @@ object guardia{
 	
 	//* Ordena los Jabalies atrapados por ID
 	method ordenarJabalies(){
-		atrapados.sortBy({jabaliA,jabaliB => jabaliA.id()<jabaliB.id()})
+		atrapados.sortBy({jabaliA,jabaliB => jabaliA.identity()<jabaliB.identity()})
 	}
 }
  
