@@ -123,9 +123,7 @@ object juego {
 		// Muestra mensaje
 		game.say(guardia,'VAMOOOO')
 	}
-	
 
-	
 //* #############################################
 //* ##### FUNCIONES DE CONTROL DEL JABALIES #####
 //* #############################################
@@ -144,15 +142,18 @@ object juego {
 		jabalies.take(nivel).forEach({jabali => jabali.mover()})
 	}
 	
+	method ordenarJabalies(){
+		jabalies.sortBy({jabaliA,jabaliB => jabaliA.identity()<jabaliB.identity()})
+	}
 	
 	// 3.3.1- Chequea si están todos los jabalies atrapados
 	method todosAtrapados(){
 		// Ordena los Jabali por ID
 		guardia.ordenarJabalies()
-		const idsOrdenados = guardia.atrapados().map{jabali=>jabali.id()}
-		
-		const todosLosJabalies = self.jabalies().take(nivel).map{jabali=>jabali.id()}
+		const jabaliesAtrapadosOrdenados = guardia.atrapados().map{jabali=>jabali.identity()}
+		self.ordenarJabalies()
+		const todosLosJabalies = self.jabalies().take(nivel).map{jabali=>jabali.identity()}
 		 
-		return idsOrdenados == todosLosJabalies
+		return jabaliesAtrapadosOrdenados == todosLosJabalies
 	}
 }

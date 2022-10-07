@@ -5,10 +5,11 @@ import utilidades.*
 
 
 object tablero{
-	//* Dimensiones
+	//* Dimensiones del mapa
 	const property alto = 20
 	const property ancho = 25
 	const property dimensionDeCelda = 40
+	//* El alto del menú, para que no pise el reloj y las vidas
 	const property altoMenu = 3
 
 	//* Configuración de dimensiones y fondo
@@ -20,9 +21,7 @@ object tablero{
   		game.boardGround("static/img/fondos/tornavias.png")
 	}
 	
-	method limpiarTablero(){
-		game.clear()
-	}
+	method limpiarTablero(){ game.clear() }
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa
 	method posicionValida(nuevaPosicion){
@@ -37,7 +36,7 @@ object tablero{
 	}
 
 	//* 3.1.1- Muestra una nueva posición aleatoria dentro del tablero
-	method posicionAleatoria() = game.at(0.randomUpTo(game.width()),0.randomUpTo(game.height()- altoMenu))
+	method posicionAleatoria() = game.at(0.randomUpTo(game.width()),0.randomUpTo(game.height() - altoMenu))
 	
 }
 
