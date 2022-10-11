@@ -5,19 +5,17 @@ import tablero.*
 import guardia.*
 
 class Jabali{
-	
-	//* Usamos la propiedad id para identificar que Jabalí está atrapado por el guardia
-	var property id = 1
+
 	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = tablero.posicionAleatoria()
-	
+	var property atrapado = false
 	var property imgDer = "static/img/personajes/jabaliDer.png"
 	var property imgIzq = "static/img/personajes/jabaliIzq.png"
 	
-	var property imagen = "static/img/personajes/jabaliIzq.png"
+	var property image = "static/img/personajes/jabaliIzq.png"
 	
 	//* Imagen del Jabalí, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(jabali)
-	method image() = imagen
+	//method image() = imagen
 
 	//* Reestablece a aleatoria la posición del Jabalí
 	method resetearPosicion(){
@@ -33,7 +31,7 @@ class Jabali{
 		// 2- Chequea si el próximo movimiento es adentro del mapa
 		if (tablero.posicionValida(nuevoMovimiento)){
 			// Cambia la imagen dependiendo hacia donde se mueve el jabalí
-			imagen = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()
+			image = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()
 			
 			// 2.1- Si se mueve, reemplaza la posición del Jabalí por el nuevo movimiento
 			position = nuevoMovimiento
@@ -42,56 +40,60 @@ class Jabali{
 			self.mover()
 		} 
 	}
-
+	method estaAtrapado() = guardia.atrapados().contains(self)
 }
 
 
 
 //* ####################################################
-//* ####### FUNCIONES DE CONTROL DE LOS JABALIES #######
+//* ####### FUNCIONES DE CONTROL DEL NIVEL #############
 //* ####################################################
 
-object jabalies{
-	// Jabalies del juego
+class Nivel{
 	var property jabalies = []
+	var property nroNivel
+	var property frecuenciaDeMovimiento = 100/nroNivel
 	
-	var property frecuenciaDeMovimiento = 100/juego.nivel()
 	
-	method agregarJabali(){
-		jabalies.add(new Jabali(id=juego.nivel()))
+//	method initialize(){
+//		self.limpiarJabalies()
+//		self.crearJabalies()
+//		self.moverJabalies()
+//	}
+	
+	method limpiarJabalies(){
+		self.jabalies().clear()
 	}
 	
 	// 3.1- Spawnea los jabalies en el mapa
 	method crearJabalies(){
 		// Reinicia la posición de los Jabalies
-		jabalies.take(juego.nivel()).forEach({jabali => jabali.resetearPosicion()})
-		
+		nroNivel.times({i => jabalies.add(new Jabali())})
 		// Los spawnea
-		jabalies.take(juego.nivel()).forEach({jabali => game.addVisual(jabali)})
+		jabalies.forEach({jabali => game.addVisual(jabali)})
 	}
 	
 	// 3.2- Mueve los jabalies
 	method moverJabalies(){ 
-		jabalies.take(juego.nivel()).forEach({jabali => jabali.mover()})
+		jabalies.forEach({jabali => jabali.mover()})
 	}
 	
-	method mostrarIdJabalies() = self.jabalies().take(juego.nivel()).map{jabali=>jabali.id()}
-	
 	// 3.3.1- Chequea si están todos los jabalies atrapados
-	method todosAtrapados() = guardia.mostrarIdJabalies() == self.mostrarIdJabalies()
+	method todosAtrapados() = jabalies.all{jabali => jabali.estaAtrapado()}	
 	
 	//* 4- Es ejecutado cuando se atrapa un Jabali
 	method unJabaliEsAtrapado(jabali){
 		//* 4.1- El guardia atrapa al jabali
 		guardia.atrapaAlJabali(jabali)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
-		juego.chequearAnimalesAtrapados()
+		self.chequearAnimalesAtrapados()
+	}
+	
+	// 4- Chequea si están todos los animales atrapados
+	method chequearAnimalesAtrapados(){
+		if(self.todosAtrapados()){
+			juego.subirNivel()
+			juego.iniciarNivel()
+		}		
 	}
 }
-
-// Creamos 4 jabalís para los 4 Niveles con sus id
-//const jaba1 = new Jabali()
-//const jaba2 = new Jabali(id=2)
-//const jaba3 = new Jabali(id=3)
-//const jaba4 = new Jabali(id=4)
-

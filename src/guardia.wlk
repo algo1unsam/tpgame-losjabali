@@ -36,18 +36,8 @@ object guardia{
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
 	method atrapaAlJabali(jabali){
 		atrapados.add(jabali)
-		
-		guardia.ordenarJabalies()
-		
 		game.removeVisual(jabali)
 	}
-	
-	//* Ordena los Jabalies atrapados por ID
-	method ordenarJabalies(){
-		atrapados.sortBy({jabaliA,jabaliB => jabaliA.id()<jabaliB.id()})
-	}
-	
-	method mostrarIdJabalies() = guardia.atrapados().map{jabali=>jabali.id()}
 	
 	method limpiarJabalies(){
 		self.atrapados().clear()
