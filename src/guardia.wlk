@@ -1,23 +1,44 @@
+//* Importaciones
 import wollok.game.*
 import juego.*
 import tablero.*
+
 object guardia{
 	
 	var property atrapados = []
+	
 	var property position = game.center()
 	
+	var property imagen = "static/img/personajes/guardiaDer.png"
+	
+	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
+	method image() = imagen
+	
+	//* Chequea y cambia la posición del guardia
 	method position(nuevaPosicion){
 		if (tablero.posicionValida(nuevaPosicion)){
 			position = nuevaPosicion
 		} 
 	}
 	
-	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
-	method image() = "static/img/personajes/guardia.png"
+
 	
+	method configurarTeclas() {		
+
+		keyboard.right().onPressDo({imagen="static/img/personajes/guardiaDer.png"})
+		keyboard.left().onPressDo({imagen="static/img/personajes/guardiaIzq.png"})
+	}
+	
+//* #####################################################
+//* ######## FUNCIONES DE LOS JABALIES ATRAPADOS ########
+//* #####################################################
+
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
 	method atrapaAlJabali(jabali){
 		atrapados.add(jabali)
+		
+		guardia.ordenarJabalies()
+		
 		game.removeVisual(jabali)
 	}
 	
@@ -25,6 +46,22 @@ object guardia{
 	method ordenarJabalies(){
 		atrapados.sortBy({jabaliA,jabaliB => jabaliA.id()<jabaliB.id()})
 	}
+	
+	method mostrarIdJabalies() = guardia.atrapados().map{jabali=>jabali.id()}
+	
+	method limpiarJabalies(){
+		self.atrapados().clear()
+	}
+	
+	
+	//* 7- Reinicializa la posición del guardia
+	method restablecerPosicion(){
+		// Limpia el mapa
+		game.clear()
+		// Lleva al guardia al centro
+		game.addVisualIn(self,game.center())
+	}
+	
 }
  
  
