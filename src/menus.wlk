@@ -62,10 +62,9 @@ object menuInicial inherits Menu {
 		salir.mostrar()
 	}
 
-	override method iniciar() {
-		super()
+	//override method iniciar() {
 		//teclado.configurarTeclasMenuInicial()
-	}
+	//}
 }
 
 
@@ -83,10 +82,9 @@ object menuInstruccionesTeclas inherits Menu {
 		iniciar.mostrar()
 	}
 
-	override method iniciar() {
-		super()
+	//override method iniciar() {
 		//teclado.configurarTeclaContinuar()
-	}
+	//}
 
 }
 
@@ -100,10 +98,9 @@ object menuFinal inherits Menu {
 		salir.mostrar()
 	}
 
-	override method iniciar() {
-		super()
+	//override method iniciar() {
 		//teclado.configurarTeclasMenuFinal()
-	}
+	//}
 
 }
 //!	FIXME: HAY QUE CORREGIR LOS NOMBRES DE LOS METODOS, NO COINCIDEN CON LOS DECLARADOS EN ESTE JUEGO. ESTA ROMPIENDO POR ESO */

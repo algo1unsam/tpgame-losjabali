@@ -1,3 +1,4 @@
+//* Importaciones
 import wollok.game.*
 import guardia.*
 import Jabali.*
@@ -5,20 +6,24 @@ import utilidades.*
 
 
 object tablero{
+	
 	//* Dimensiones del mapa
 	const property alto = 20
 	const property ancho = 25
-	const property dimensionDeCelda = 40
+	const property dimensionDeCelda = 45
+	
 	//* El alto del menú, para que no pise el reloj y las vidas
 	const property altoMenu = 3
 
+	var property imagenFondo="static/img/fondos/tornavias.png"
+
 	//* Configuración de dimensiones y fondo
 	method configurar(){
-		game.width(self.ancho())
-  		game.height(self.alto())
+		game.width(ancho)
+  		game.height(alto)
 		game.cellSize(dimensionDeCelda)
 
-  		game.boardGround("static/img/fondos/tornavias.png")
+  		game.boardGround(imagenFondo)
 	}
 	
 	method limpiarTablero(){ game.clear() }
