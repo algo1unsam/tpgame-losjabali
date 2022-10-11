@@ -1,4 +1,6 @@
 import wollok.game.*
+import juego.*
+
 
 //* ##########################################
 //* ###### FUNCIONES DE VIDAS DEL JUEGO ######
@@ -62,33 +64,75 @@ object vidas{
 
 
 
-//* ##########################################
-//* ###### FUNCIONES DE RELOJ DE JUEGO ######
-//* ##########################################
+//* ###########################################################################
+//* ######################### FUNCIONES DE CONTADORES #########################
+//* ###########################################################################
 
-object reloj{
-	var property tiempo = 120
+class Contador{
+	
+	var property cantidad = cantidadInicial
+	var property cantidadInicial = 12
+	
+	var property posicionX = game.width()-2
+	var property posicionY = game.height()-2
+	var property posicion = game.at(posicionX,posicionY)
 	
 	//* Función que toma Wollok para cargar el tiempo
-	method text() = tiempo.toString()
+	method text() = cantidad.toString()
 	//* Función que toma Wollok para cambair el color del texto
 	method textColor() = 'ffffff'
 
-	//* Hace que el tiempo se vaya reduciendo
-	method pasarTiempo() {
-		tiempo -= 1
-	}
+	//* Manera en la que va evolucionando el contador
+	method avanzar() { cantidad -= 1 }
 	
-	//* Inicia el contador del reloj
+	method reiniciar(){	cantidad = cantidadInicial }
+	//* Inicia el contador
 	method iniciar(){
-		tiempo = 120
-		game.addVisualIn(self,game.at(game.width()-2,game.height()-2))
-		game.onTick(100,"tiempo",{self.pasarTiempo()})
+		game.onTick(1000,"contador",{self.avanzar()})
+		self.mostrar()
+	}
+	method mostrar(){ game.addVisualIn(self,posicion) }
+	
+	//* Detiene el contador
+	method detener(){ game.removeTickEvent("contador") }
+	
+	method quitar(){ game.removeVisual(self) }
+}
+
+//* #############################
+//* ########### RELOJ ###########
+//* #############################
+object reloj inherits Contador{
+	
+	//* 5- Chequea el tiempo
+	method chequearTiempo(){
+		if (self.cantidad() <= 0){
+		//* 1-  Si el reloj llegó a cero chequea cuantas vidas tiene
+			if(vidas.chequearVidas()){
+				//* 1.1-  Si aún tiene vidas, reinicia el reloj totalmente y pierde una vida
+				self.detener()
+				self.reiniciar()
+				self.quitar()
+				self.iniciar()
+				
+				vidas.perderVida()			
+			}else{				
+				//* 1.2- Si no tiene vidas. pierde
+				juego.perder()
+			}
+		}
 	}
 	
-	//* Detiene el contador del reloj
-	method detener(){
-		game.removeVisual(reloj)
-		game.removeTickEvent("tiempo")
+}
+
+//* ##############################
+//* ########### PUNTOS ###########
+//* ##############################
+
+object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) {
+	//*1-  Hace que los puntos sean crecientes
+	override method avanzar() {
+		cantidad += 200
 	}
 }
+
