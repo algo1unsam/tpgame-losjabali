@@ -55,14 +55,15 @@ class Nivel{
 	var property frecuenciaDeMovimiento = 100/nroNivel
 	
 	
-//	method initialize(){
-//		self.limpiarJabalies()
-//		self.crearJabalies()
-//		self.moverJabalies()
-//	}
+	method initialize(){
+		self.limpiarJabalies()
+		self.crearJabalies()
+		self.moverJabalies()
+	}
 	
 	method limpiarJabalies(){
 		self.jabalies().clear()
+		guardia.atrapados().clear()
 	}
 	
 	// 3.1- Spawnea los jabalies en el mapa
@@ -86,11 +87,11 @@ class Nivel{
 		//* 4.1- El guardia atrapa al jabali
 		guardia.atrapaAlJabali(jabali)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
-		self.chequearAnimalesAtrapados()
+		self.chequearFinDeNivel()
 	}
 	
 	// 4- Chequea si están todos los animales atrapados
-	method chequearAnimalesAtrapados(){
+	method chequearFinDeNivel(){
 		if(self.todosAtrapados()){
 			juego.subirNivel()
 			juego.iniciarNivel()

@@ -39,10 +39,6 @@ object guardia{
 		game.removeVisual(jabali)
 	}
 	
-	method limpiarJabalies(){
-		self.atrapados().clear()
-	}
-	
 	
 	//* 7- Reinicializa la posición del guardia
 	method restablecerPosicion(){

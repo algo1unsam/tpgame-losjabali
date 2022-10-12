@@ -116,7 +116,7 @@ object reloj inherits Contador{
 				vidas.perderVida()			
 			}else{				
 				//* 1.2- Si no tiene vidas. pierde
-				juego.perder()
+				juego.terminarJuego()
 			}
 		}
 	}
