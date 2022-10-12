@@ -1,4 +1,3 @@
-//* Importaciones
 import wollok.game.*
 import guardia.*
 import Jabali.*

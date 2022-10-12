@@ -1,4 +1,3 @@
-//* Importaciones
 import wollok.game.*
 import juego.*
 import tablero.*
@@ -42,8 +41,6 @@ object guardia{
 	
 	//* 7- Reinicializa la posición del guardia
 	method restablecerPosicion(){
-		// Limpia el mapa
-		game.clear()
 		// Lleva al guardia al centro
 		game.addVisualIn(self,game.center())
 	}
