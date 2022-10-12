@@ -108,11 +108,7 @@ object reloj inherits Contador{
 		//* 1-  Si el reloj llegó a cero chequea cuantas vidas tiene
 			if(vidas.chequearVidas()){
 				//* 1.1-  Si aún tiene vidas, reinicia el reloj totalmente y pierde una vida
-				self.detener()
 				self.reiniciar()
-				self.quitar()
-				self.iniciar()
-				
 				vidas.perderVida()			
 			}else{				
 				//* 1.2- Si no tiene vidas. pierde

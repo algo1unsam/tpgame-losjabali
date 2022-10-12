@@ -37,14 +37,6 @@ object guardia{
 		atrapados.add(jabali)
 		game.removeVisual(jabali)
 	}
-	
-	
-	//* 7- Reinicializa la posición del guardia
-	method restablecerPosicion(){
-		// Lleva al guardia al centro
-		game.addVisualIn(self,game.center())
-	}
-	
 }
  
  
