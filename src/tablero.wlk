@@ -22,8 +22,8 @@ object tablero{
 		game.width(ancho)
   		game.height(alto)
 		game.cellSize(dimensionDeCelda)
-
   		game.boardGround(imagenFondo)
+  		vidas.crearVidas()
 	}
 	
 	method limpiarTablero(){ game.clear() }

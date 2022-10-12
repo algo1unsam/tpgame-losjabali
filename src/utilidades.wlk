@@ -15,7 +15,7 @@ class Corazon{
 	var property lleno = true
 	
 	//* Posición en X e Y del corazón
-	const posicionX = 1
+	var property posicionX = 1
 	const posicionY = game.height()-1
 	
 	
@@ -38,22 +38,20 @@ class Corazon{
 		lleno=true
 	}
 }
-
-//* Definimos las 3 vidas
-const vida1 = new Corazon()
-const vida2 = new Corazon(id=1, posicionX=2)
-const vida3 = new Corazon(id=2,posicionX=3)
-
 //* Objeto que maneja las vidas
 object vidas{
-
-	const vidas=[vida1,vida2,vida3]
+	const cantidadDeVidas = 3
+	const vidas=[]
 	
 	method perderVida(){
 		vidas.filter({vida=>vida.lleno()}).last().vaciarCorazon()
 	}
 	
-	method crearCorazones(){
+	method crearVidas(){
+		cantidadDeVidas.times({i => vidas.add(new Corazon(posicionX = i+1))})
+	}
+	
+	method mostrarCorazones(){
 		vidas.forEach({vida=>game.addVisual(vida)})	
 	}
 	

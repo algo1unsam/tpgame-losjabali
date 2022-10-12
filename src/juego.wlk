@@ -4,11 +4,12 @@ import Jabali.*
 import utilidades.*
 import tablero.*
 
+
 object juego {
 	
 	// Nivel del juego
-	var property nivel = 1
-	var property nivelMaximo = 4
+	var property nroNivel = 1
+	//var property nivelMaximo = 4
 	
 	
 //* ##########################################
@@ -38,8 +39,13 @@ object juego {
 	
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
+		const nivel = new Nivel(nroNivel = nroNivel)
 		//* 3.1-  Limpia el tablero
 		tablero.limpiarTablero()
+		
+		nivel.limpiarJabalies()
+		nivel.crearJabalies()
+		nivel.moverJabalies()
 
 		//* 3.2- Agrega al guardia
 		tablero.agregarPersonajeMobible(guardia)
@@ -53,45 +59,22 @@ object juego {
 		puntos.iniciar()
 
 		//* 3.5- Muestra las vidas
-		vidas.crearCorazones()
+		vidas.mostrarCorazones()
 
 		//* 3.6- Limpia el array de los jabalís atrapados por el guardia
 		guardia.limpiarJabalies()
-		
-		//* 3.7- Agrega un Jabalí por nivel
-		jabalies.agregarJabali()
-		
-		//* 3.8- Crea los jabalies 
-		jabalies.crearJabalies()
-		
+					
 		//* 3.9- Cada un determinado tiempo, el Jabalí se mueve
-		game.onTick(jabalies.frecuenciaDeMovimiento(),"El jabali se mueve",{jabalies.moverJabalies()})
+		game.onTick(nivel.frecuenciaDeMovimiento(),"El jabali se mueve",{nivel.moverJabalies()})
 		
 		//* 3.10- Cuando el guardia colisiona con los jabalí, le avisa al juego que un jabalí es atrapado
-		game.onCollideDo(guardia,{jabali => jabalies.unJabaliEsAtrapado(jabali)})
+		game.onCollideDo(guardia,{jabali => nivel.unJabaliEsAtrapado(jabali)})
 		
 		//* 3.11- Si el tiempo se agota, chequea el tiempo y las vidas
 		game.onTick(1000,"Chequear tiempo",{reloj.chequearTiempo()})
 
 	}
 
-	// 4- Chequea si están todos los animales atrapados
-	method chequearAnimalesAtrapados(){
-		
-		if(jabalies.todosAtrapados()){
-			//* 4.1- Si lo están, sube de nivel
-			juego.subirNivel()
-
-			//* 4.2- Chequea si se llegó al nivel 4
-			if (juego.nivel() > juego.nivelMaximo()){
-				//* - Si supera el nivel 4, ganó el juego
-				juego.ganar()
-			}else{
-				//* - Sino, inicia un nuevo nivel
-				juego.iniciarNivel()
-			}
-		}		
-	}
 	
 
 
@@ -113,7 +96,7 @@ object juego {
 	
 	//* 7- Subir de nivel
 	method subirNivel(){
-		nivel+=1
+		nroNivel+=1
 	}
 	
 }
