@@ -1,4 +1,3 @@
-//* Importaciones
 import wollok.game.*
 import guardia.*
 import Jabali.*
@@ -25,8 +24,6 @@ object tablero{
   		game.boardGround(imagenFondo)
   		vidas.crearVidas()
 	}
-	
-	method limpiarTablero(){ game.clear() }
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa
 	method posicionValida(nuevaPosicion){

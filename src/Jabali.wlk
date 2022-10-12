@@ -1,4 +1,3 @@
-//* Importaciones
 import wollok.game.*
 import juego.*
 import tablero.*
@@ -41,59 +40,4 @@ class Jabali{
 		} 
 	}
 	method estaAtrapado() = guardia.atrapados().contains(self)
-}
-
-
-
-//* ####################################################
-//* ####### FUNCIONES DE CONTROL DEL NIVEL #############
-//* ####################################################
-
-class Nivel{
-	var property jabalies = []
-	var property nroNivel
-	var property frecuenciaDeMovimiento = 100/nroNivel
-	
-	
-//	method initialize(){
-//		self.limpiarJabalies()
-//		self.crearJabalies()
-//		self.moverJabalies()
-//	}
-	
-	method limpiarJabalies(){
-		self.jabalies().clear()
-	}
-	
-	// 3.1- Spawnea los jabalies en el mapa
-	method crearJabalies(){
-		// Reinicia la posición de los Jabalies
-		nroNivel.times({i => jabalies.add(new Jabali())})
-		// Los spawnea
-		jabalies.forEach({jabali => game.addVisual(jabali)})
-	}
-	
-	// 3.2- Mueve los jabalies
-	method moverJabalies(){ 
-		jabalies.forEach({jabali => jabali.mover()})
-	}
-	
-	// 3.3.1- Chequea si están todos los jabalies atrapados
-	method todosAtrapados() = jabalies.all{jabali => jabali.estaAtrapado()}	
-	
-	//* 4- Es ejecutado cuando se atrapa un Jabali
-	method unJabaliEsAtrapado(jabali){
-		//* 4.1- El guardia atrapa al jabali
-		guardia.atrapaAlJabali(jabali)
-		//* 4.2-  Chequea si todos los Jabali estan atrapados
-		self.chequearAnimalesAtrapados()
-	}
-	
-	// 4- Chequea si están todos los animales atrapados
-	method chequearAnimalesAtrapados(){
-		if(self.todosAtrapados()){
-			juego.subirNivel()
-			juego.iniciarNivel()
-		}		
-	}
 }
