@@ -39,8 +39,8 @@ object juego {
 	
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
-		const nivel = new Nivel(nroNivel = nroNivel)
 		reloj.reiniciar()
+		const nivel = new Nivel(nroNivel = nroNivel)
 				
 		//* 3.9- Cada un determinado tiempo, el nivel mueve a los jabalies
 		game.onTick(nivel.frecuenciaDeMovimiento(),"El jabali se mueve",{nivel.moverJabalies()})
@@ -56,7 +56,8 @@ object juego {
 	//* 6- Perder
 	method terminarJuego(){
 		//* Retorna 
-		guardia.restablecerPosicion()
+		game.clear()
+		game.addVisualIn(guardia,game.center())
 		// Muestra mensaje
 		game.say(guardia,'NOOOOO')
 	}
@@ -89,7 +90,7 @@ class Nivel{
 	}
 	
 	method limpiarJabalies(){
-		//self.jabalies().clear()
+		jabalies.clear()
 		guardia.atrapados().clear()
 	}
 	
