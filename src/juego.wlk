@@ -9,6 +9,7 @@ object juego {
 	
 	// Nivel del juego
 	var property nroNivel = 1
+	var niveles = []
 	
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
@@ -40,26 +41,25 @@ object juego {
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
 		reloj.reiniciar()
-		const nivel = new Nivel(nroNivel = nroNivel)
+		guardia.atrapados().clear()
+		niveles.add(new Nivel(nroNivel = nroNivel))
 				
 		//* 3.9- Cada un determinado tiempo, el nivel mueve a los jabalies
-		game.onTick(nivel.frecuenciaDeMovimiento(),"El jabali se mueve",{nivel.moverJabalies()})
+		game.onTick(niveles.last().frecuenciaDeMovimiento(),"El jabali se mueve",{niveles.last().moverJabalies()})
 		
 		//* 3.10- Cuando el guardia colisiona con los jabalí, le avisa al nivel que un jabalí fue atrapado
-		game.onCollideDo(guardia,{jabali => nivel.unJabaliEsAtrapado(jabali)})
+		game.onCollideDo(guardia,{jabali => niveles.last().unJabaliEsAtrapado(jabali)})
 		
 		//* 3.11- Si el tiempo se agota, chequea el tiempo y las vidas
 		game.onTick(1000,"Chequear tiempo",{reloj.chequearTiempo()})
-
 	}
-	
 	//* 6- Perder
 	method terminarJuego(){
 		//* Retorna 
 		game.clear()
 		game.addVisualIn(guardia,game.center())
 		// Muestra mensaje
-		game.say(guardia,'NOOOOO')
+		game.say(guardia,puntos.cantidad().toString())
 	}
 	
 	//* 7- Subir de nivel
@@ -82,18 +82,10 @@ class Nivel{
 	var property nroNivel
 	var property frecuenciaDeMovimiento = 100/nroNivel
 	
-	
 	method initialize(){
-		self.limpiarJabalies()
 		self.crearJabalies()
 		self.moverJabalies()
 	}
-	
-	method limpiarJabalies(){
-		jabalies.clear()
-		guardia.atrapados().clear()
-	}
-	
 	// 3.1- Spawnea los jabalies en el mapa
 	method crearJabalies(){
 		// Reinicia la posición de los Jabalies
@@ -101,12 +93,10 @@ class Nivel{
 		// Los spawnea
 		jabalies.forEach({jabali => game.addVisual(jabali)})
 	}
-	
 	// 3.2- Mueve los jabalies
 	method moverJabalies(){ 
 		jabalies.forEach({jabali => jabali.mover()})
 	}
-	
 	// 3.3.1- Chequea si están todos los jabalies atrapados
 	method todosAtrapados() = jabalies.all{jabali => jabali.estaAtrapado()}	
 	
@@ -117,7 +107,6 @@ class Nivel{
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
 	}
-	
 	// 4- Chequea si están todos los animales atrapados
 	method chequearFinDeNivel(){
 		if(self.todosAtrapados()){

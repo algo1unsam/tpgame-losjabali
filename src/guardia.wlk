@@ -19,9 +19,6 @@ object guardia{
 			position = nuevaPosicion
 		} 
 	}
-	
-
-	
 	method configurarTeclas() {		
 
 		keyboard.right().onPressDo({imagen="static/img/personajes/guardiaDer.png"})
