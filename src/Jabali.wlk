@@ -31,7 +31,8 @@ class Enemigo{
 			
 			// 2.1- Si se mueve, reemplaza la posición del Jabalí por el nuevo movimiento
 			position = nuevoMovimiento
-		}else{
+		}
+		else{
 			// 2.2- Si la posición no es correcta, vuelve a ejecutar la función hasta que haya una posición correcta
 			self.mover()
 		} 
@@ -59,7 +60,10 @@ class Rata inherits Enemigo{
 		if (tablero.posicionValida(nuevoMovimiento)){
 			image = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()	
 			position = nuevoMovimiento
-		}else{
+		}
+		else{
 			self.mover()		
+		}
 	}
 }
+	}
