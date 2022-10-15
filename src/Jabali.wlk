@@ -3,20 +3,18 @@ import juego.*
 import tablero.*
 import guardia.*
 
-class Jabali{
+class Enemigo{
 
 	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = tablero.posicionAleatoria()
 	var property atrapado = false
-	var property imgDer = "static/img/personajes/jabaliDer.png"
-	var property imgIzq = "static/img/personajes/jabaliIzq.png"
+	var property imgDer
+	var property imgIzq
+	var property image
 	
-	var property image = "static/img/personajes/jabaliIzq.png"
-	
-	//* Imagen del Jabalí, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(jabali)
-	//method image() = imagen
+	//* Imagen del Enemigo, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(enemigo)
 
-	//* Reestablece a aleatoria la posición del Jabalí
+	//* Reestablece a aleatoria la posición del Enemigo
 	method resetearPosicion(){
 		position = tablero.posicionAleatoria()
 	}
@@ -25,7 +23,6 @@ class Jabali{
 	method mover(){
 		// 1- Genera una nueva posición aleatoria entre (-1,-1) y (1,1) en los ejes (x,y)
 		const nuevoMovimiento = game.at(position.x() + (-1).randomUpTo(1),position.y() + (-1).randomUpTo(1))
-		
 		
 		// 2- Chequea si el próximo movimiento es adentro del mapa
 		if (tablero.posicionValida(nuevoMovimiento)){
@@ -40,4 +37,29 @@ class Jabali{
 		} 
 	}
 	method estaAtrapado() = guardia.atrapados().contains(self)
+}
+
+class Jabali inherits Enemigo{
+	method initialize(){
+		imgDer = "static/img/personajes/jabaliDer.png"
+		imgIzq = "static/img/personajes/jabaliIzq.png"
+		image = "static/img/personajes/jabaliIzq.png"
+	}
+	method saltar(){} 		
+}
+
+class Rata inherits Enemigo{
+	method initialize(){
+		imgDer = "static/img/personajes/rataDer.png"
+		imgIzq = "static/img/personajes/rataIzq.png"
+		image = "static/img/personajes/rataIzq.png"
+	}
+	method saltar(){
+		const nuevoMovimiento = game.at(position.x() + (-5).randomUpTo(5),position.y() + (-5).randomUpTo(5))
+		if (tablero.posicionValida(nuevoMovimiento)){
+			image = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()	
+			position = nuevoMovimiento
+		}else{
+			self.mover()		
+	}
 }

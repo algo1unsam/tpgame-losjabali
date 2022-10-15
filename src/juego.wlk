@@ -9,7 +9,7 @@ object juego {
 	
 	// Nivel del juego
 	var property nroNivel = 1
-	var niveles = []
+	const niveles = []
 	
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
@@ -44,11 +44,11 @@ object juego {
 		guardia.atrapados().clear()
 		niveles.add(new Nivel(nroNivel = nroNivel))
 				
-		//* 3.9- Cada un determinado tiempo, el nivel mueve a los jabalies
-		game.onTick(niveles.last().frecuenciaDeMovimiento(),"El jabali se mueve",{niveles.last().moverJabalies()})
+		//* 3.9- Cada un determinado tiempo, el nivel mueve a los enemigo
+		game.onTick(niveles.last().frecuenciaDeMovimiento(),"El enemigo se mueve",{niveles.last().moverEnemigos()})
 		
 		//* 3.10- Cuando el guardia colisiona con los jabalí, le avisa al nivel que un jabalí fue atrapado
-		game.onCollideDo(guardia,{jabali => niveles.last().unJabaliEsAtrapado(jabali)})
+		game.onCollideDo(guardia,{enemigo => niveles.last().unEnemigoEsAtrapado(enemigo)})
 		
 		//* 3.11- Si el tiempo se agota, chequea el tiempo y las vidas
 		game.onTick(1000,"Chequear tiempo",{reloj.chequearTiempo()})
@@ -65,7 +65,7 @@ object juego {
 	//* 7- Subir de nivel
 	method subirNivel(){
 		nroNivel+=1
-		game.removeTickEvent("El jabali se mueve")
+		game.removeTickEvent("El enemigo se mueve")
 		game.removeTickEvent("Chequear tiempo")
 		self.iniciarNivel()
 	}
@@ -78,32 +78,35 @@ object juego {
 //* ####################################################
 
 class Nivel{
-	var property jabalies = []
+	var property enemigos = []
 	var property nroNivel
 	var property frecuenciaDeMovimiento = 100/nroNivel
 	
 	method initialize(){
-		self.crearJabalies()
-		self.moverJabalies()
+		self.crearEnemigos()
+		self.moverEnemigos()
 	}
 	// 3.1- Spawnea los jabalies en el mapa
-	method crearJabalies(){
+	method crearEnemigos(){
 		// Reinicia la posición de los Jabalies
-		nroNivel.times({i => jabalies.add(new Jabali())})
+		nroNivel.times({i => enemigos.add(new Jabali())})
+		(nroNivel/3).times({i => enemigos.add(new Rata())})
 		// Los spawnea
-		jabalies.forEach({jabali => game.addVisual(jabali)})
+		enemigos.forEach({enemigo => game.addVisual(enemigo)})
 	}
 	// 3.2- Mueve los jabalies
-	method moverJabalies(){ 
-		jabalies.forEach({jabali => jabali.mover()})
+	method moverEnemigos(){ 
+		enemigos.forEach({enemigo => enemigo.mover()})
+		enemigos.forEach({enemigo => enemigo.saltar()})
+		
 	}
 	// 3.3.1- Chequea si están todos los jabalies atrapados
-	method todosAtrapados() = jabalies.all{jabali => jabali.estaAtrapado()}	
+	method todosAtrapados() = enemigos.all{enemigo => enemigo.estaAtrapado()}	
 	
 	//* 4- Es ejecutado cuando se atrapa un Jabali
-	method unJabaliEsAtrapado(jabali){
+	method unEnemigoEsAtrapado(enemigo){
 		//* 4.1- El guardia atrapa al jabali
-		guardia.atrapaAlJabali(jabali)
+		guardia.atrapaAlEnemigo(enemigo)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
 	}
