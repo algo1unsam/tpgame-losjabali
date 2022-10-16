@@ -30,9 +30,9 @@ object guardia{
 //* #####################################################
 
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
-	method atrapaAlJabali(jabali){
-		atrapados.add(jabali)
-		game.removeVisual(jabali)
+	method atrapaAlEnemigo(enemigo){
+		atrapados.add(enemigo)
+		game.removeVisual(enemigo)
 	}
 }
  
