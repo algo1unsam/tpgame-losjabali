@@ -5,6 +5,7 @@ import tablero.*
 object guardia{
 	
 	var property atrapados = []
+	var property trampas = []
 	
 	var property position = game.center()
 	
@@ -23,6 +24,14 @@ object guardia{
 
 		keyboard.right().onPressDo({imagen="static/img/personajes/guardiaDer.png"})
 		keyboard.left().onPressDo({imagen="static/img/personajes/guardiaIzq.png"})
+	}
+	
+	method equiparse(){
+		2.times({i => trampas.add(new TrampaDeOsos(posicionInicial=game.at(game.height()-1,4+i))})
+	}
+	method dejarTrampa(){
+		//TODO: chequear si tiene trampas
+		trampas.anyOne().colocarse(position)
 	}
 	
 //* #####################################################
@@ -47,6 +56,24 @@ object guardia{
 		// Usar la trampa o el carrito, puede ser con la barra espaciadora, se remueve de su lista de adicionales
 	}
 */
+
+
+class TrampaDeOsos {
+	const property image = 'static/img/personajes/guardiaDer.png'
+	var property position = posicionInicial
+	var posicionInicial
+	
+	method initialize(){
+		game.addVisual(self)
+	}
+	method colocarse(posicion){
+		position = posicion
+	}
+	method levantarse(){
+		position = posicionInicial
+	}
+	
+}
  
  
 
