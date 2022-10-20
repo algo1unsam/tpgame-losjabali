@@ -15,7 +15,7 @@ object juegoMenu{
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
-		keyboard.backspace().onPressDo{game.stop()} 
+		keyboard.space().onPressDo{self.volverMenu()} 
 	}
 	
 	method empezar(){
@@ -23,6 +23,9 @@ object juegoMenu{
 		self.configurar()
 		game.start()
 		
+	}
+	method volverMenu(){
+		self.configurar()
 	}
 	method reiniciar(){
 		self.configurar()
@@ -73,6 +76,7 @@ object inicio inherits OpcionesMenu(image="static/img/menu/cartelIniciar.png",po
 }
 object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucciones.png",position = game.at(7, 4)){
 	method accion(){
+		game.addVisual("static/img/menu/instrucciones.png")
 		
 	}
 }

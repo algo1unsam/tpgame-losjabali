@@ -58,10 +58,10 @@ object juego {
 		game.clear()
 		game.addVisualIn(guardia,game.center())
 		// Muestra mensaje
-		game.say(guardia,puntos.cantidad().toString())
+		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
 		nroNivel = 1
 		niveles.clear()
-		juegoMenu.reiniciar()
+		game.schedule(5000, {=>juegoMenu.reiniciar()})
 	}
 	
 	//* 7- Subir de nivel
@@ -82,7 +82,7 @@ object juego {
 class Nivel{
 	var property enemigos = []
 	var property nroNivel
-	var property frecuenciaDeMovimiento = 100/nroNivel
+	var property frecuenciaDeMovimiento = 500/nroNivel
 	
 	method initialize(){
 		self.crearEnemigos()

@@ -69,7 +69,7 @@ object vidas{
 class Contador{
 	
 	var property cantidad = cantidadInicial
-	var property cantidadInicial = 15
+	var property cantidadInicial = 12
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-2
 	var property posicion = game.at(posicionX,posicionY)
