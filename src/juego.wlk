@@ -59,6 +59,8 @@ object juego {
 		game.addVisualIn(guardia,game.center())
 		// Muestra mensaje
 		game.say(guardia,puntos.cantidad().toString())
+		nroNivel = 1
+		niveles.clear()
 		juegoMenu.reiniciar()
 	}
 	
