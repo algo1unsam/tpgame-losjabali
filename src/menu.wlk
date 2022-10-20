@@ -15,7 +15,8 @@ object juegoMenu{
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
-		keyboard.backspace().onPressDo{game.stop()} 
+		//keyboard.space().onPressDo(self.empezar())
+		//keyboard.backspace().onPressDo{game.stop()} 
 	}
 	
 	method empezar(){
@@ -30,11 +31,23 @@ object juegoMenu{
 	method accionar(){
 		opciones.get(flecha.numero()).accion()
 	}
+	method inhabilitarOpciones(){
+		opciones.clear()
+		opciones.add(instrucciones)
+		opciones.add(instrucciones)
+		opciones.add(instrucciones)
+	}
+	method rehabilitarOpciones(){
+		opciones.clear()
+		opciones.add(inicio)
+		opciones.add(instrucciones)
+		opciones.add(salir)
+	}
 }
 object flecha{
 	const posicionesY= [7,4,1]
  	var property numero=0
- 	
+
  	method image()="static/img/personajes/jabaliDer.png"
 	
 	method subir(){
@@ -50,6 +63,20 @@ object flecha{
 	}
 	
 	method opcion()= numero
+
+	method inhabilitar(){
+		posicionesY.clear()
+		posicionesY.add(4)
+		posicionesY.add(4)
+		posicionesY.add(4)
+	}
+	method rehabilitar(){
+		posicionesY.clear()
+		posicionesY.add(7)
+		posicionesY.add(4)
+		posicionesY.add(1)
+		numero=1
+	}
 
 }
 
@@ -72,12 +99,32 @@ object inicio inherits OpcionesMenu(image="static/img/menu/cartelIniciar.png",po
 	}
 }
 object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucciones.png",position = game.at(7, 4)){
+	var mostrado = false
+	
 	method accion(){
 		
+		mostrado = !mostrado
+		if(mostrado){		
+			image = "static/img/menu/instrucciones.png"
+			position = game.at(3, 2)
+			salir.position(game.at(-5,-5))
+			flecha.inhabilitar()
+			juegoMenu.inhabilitarOpciones()
+		}else{
+			position = game.at(7, 4)
+			image="static/img/menu/cartelInstrucciones.png"
+			salir.position(game.at(7, 1))
+			flecha.rehabilitar()
+			juegoMenu.rehabilitarOpciones()
+		}
+
 	}
+
+	
 }
 object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", position = game.at(7, 1)){
 	method accion(){
 		game.stop()
 	}
 }
+

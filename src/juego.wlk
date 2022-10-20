@@ -3,7 +3,7 @@ import guardia.*
 import Jabali.*
 import utilidades.*
 import tablero.*
-import menu2.*
+import menu.*
 
 object juego {
 	
