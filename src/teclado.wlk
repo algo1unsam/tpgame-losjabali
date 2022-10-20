@@ -1,7 +1,7 @@
 //* Importaciones
 import wollok.game.*
 import juego.*
-import menus.*
+import menu2.*
 import guardia.*
 
 /*

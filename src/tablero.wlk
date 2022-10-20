@@ -22,7 +22,6 @@ object tablero{
   		game.height(alto)
 		game.cellSize(dimensionDeCelda)
   		game.boardGround(imagenFondo)
-  		vidas.crearVidas()
 	}
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa
