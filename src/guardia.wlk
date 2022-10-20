@@ -3,12 +3,10 @@ import juego.*
 import tablero.*
 
 object guardia{
-	
 	var property atrapados = []
 	var property trampas = []
 	
 	var property position = game.center()
-	
 	var property imagen = "static/img/personajes/guardiaDer.png"
 	
 	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
@@ -21,7 +19,6 @@ object guardia{
 		} 
 	}
 	method configurarTeclas() {		
-
 		keyboard.right().onPressDo({imagen="static/img/personajes/guardiaDer.png"})
 		keyboard.left().onPressDo({imagen="static/img/personajes/guardiaIzq.png"})
 	}

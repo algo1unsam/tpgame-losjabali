@@ -14,7 +14,7 @@ object tablero{
 	//* El alto del menú, para que no pise el reloj y las vidas
 	const property altoMenu = 3
 
-	var property imagenFondo="static/img/fondos/tornavias.png"
+	var property imagenFondo="static/img/fondos/tornaviasConBarra.png"
 
 	//* Configuración de dimensiones y fondo
 	method configurar(){
@@ -22,7 +22,6 @@ object tablero{
   		game.height(alto)
 		game.cellSize(dimensionDeCelda)
   		game.boardGround(imagenFondo)
-  		vidas.crearVidas()
 	}
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa

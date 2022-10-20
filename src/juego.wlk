@@ -3,7 +3,7 @@ import guardia.*
 import Jabali.*
 import utilidades.*
 import tablero.*
-
+import menu.*
 
 object juego {
 	
@@ -30,11 +30,10 @@ object juego {
 		guardia.configurarTeclas()
 		reloj.iniciar()
 		puntos.iniciar()
+		vidas.crearVidas()
 		vidas.mostrarCorazones()
 		//* 2.1- Configura el inicio del nivel
 		self.iniciarNivel()
-		//* 2.2- Lanza el juego
-		game.start()
 
 	}
 	
@@ -60,6 +59,9 @@ object juego {
 		game.addVisualIn(guardia,game.center())
 		// Muestra mensaje
 		game.say(guardia,puntos.cantidad().toString())
+		nroNivel = 1
+		niveles.clear()
+		juegoMenu.reiniciar()
 	}
 	
 	//* 7- Subir de nivel

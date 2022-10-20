@@ -4,7 +4,6 @@ import tablero.*
 import guardia.*
 
 class Enemigo{
-
 	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
 	var property position = tablero.posicionAleatoria()
 	var property atrapado = false
@@ -12,13 +11,10 @@ class Enemigo{
 	var property imgIzq
 	var property image
 	
-	//* Imagen del Enemigo, el método es en inglés porque lo usa Wollok Game desde el método game.addVisual(enemigo)
-
 	//* Reestablece a aleatoria la posición del Enemigo
 	method resetearPosicion(){
 		position = tablero.posicionAleatoria()
 	}
-	
 	// Método que mueve al Jabalí de lugar
 	method mover(){
 		// 1- Genera una nueva posición aleatoria entre (-1,-1) y (1,1) en los ejes (x,y)

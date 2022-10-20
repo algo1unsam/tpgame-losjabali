@@ -69,20 +69,18 @@ object vidas{
 class Contador{
 	
 	var property cantidad = cantidadInicial
-	var property cantidadInicial = 20
-	
+	var property cantidadInicial = 15
 	var property posicionX = game.width()-2
-	var property posicionY = game.height()-2
+	var property posicionY = game.height()-1
 	var property posicion = game.at(posicionX,posicionY)
 	
 	//* Función que toma Wollok para cargar el tiempo
 	method text() = cantidad.toString()
 	//* Función que toma Wollok para cambair el color del texto
-	method textColor() = 'ffffff'
+	method textColor() = 'f80000'
 
 	//* Manera en la que va evolucionando el contador
 	method avanzar() { cantidad -= 1 }
-	
 	method reiniciar(){	cantidad = cantidadInicial }
 	//* Inicia el contador
 	method iniciar(){
@@ -93,7 +91,6 @@ class Contador{
 	
 	//* Detiene el contador
 	method detener(){ game.removeTickEvent("contador") }
-	
 	method quitar(){ game.removeVisual(self) }
 }
 
@@ -108,8 +105,8 @@ object reloj inherits Contador{
 		//* 1-  Si el reloj llegó a cero chequea cuantas vidas tiene
 			if(vidas.chequearVidas()){
 				//* 1.1-  Si aún tiene vidas, reinicia el reloj totalmente y pierde una vida
-				self.reiniciar()
-				vidas.perderVida()			
+				vidas.perderVida()
+				self.reiniciar()			
 			}else{				
 				//* 1.2- Si no tiene vidas. pierde
 				juego.terminarJuego()

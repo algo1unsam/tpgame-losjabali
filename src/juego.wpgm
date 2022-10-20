@@ -1,9 +1,7 @@
 import wollok.game.*
 import juego.*
+import menu.*
 
 program jabali{
-	
-	juego.configurar()
-	juego.iniciar()
-	
+	juegoMenu.empezar()
 }
