@@ -28,7 +28,7 @@ object juegoMenu{
 		
 	}
 	method reiniciar(){
-		self.configurar
+		self.configurar()
 	}
 	method accionar(){
 		opciones.get(flecha.numero()).accion()
