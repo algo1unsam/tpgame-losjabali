@@ -69,8 +69,7 @@ object vidas{
 class Contador{
 	
 	var property cantidad = cantidadInicial
-	var property cantidadInicial = 2
-	
+	var property cantidadInicial = 15
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-2
 	var property posicion = game.at(posicionX,posicionY)
@@ -82,7 +81,6 @@ class Contador{
 
 	//* Manera en la que va evolucionando el contador
 	method avanzar() { cantidad -= 1 }
-	
 	method reiniciar(){	cantidad = cantidadInicial }
 	//* Inicia el contador
 	method iniciar(){
@@ -93,7 +91,6 @@ class Contador{
 	
 	//* Detiene el contador
 	method detener(){ game.removeTickEvent("contador") }
-	
 	method quitar(){ game.removeVisual(self) }
 }
 

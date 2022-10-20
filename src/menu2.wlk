@@ -5,8 +5,6 @@ import tablero.*
 
 object juegoMenu{
 	const property opciones=[inicio,instrucciones,salir] //opciones que tiene el menu
-// 	const musicaMenu=game.sound("musica/plantsVsZombiesMainMenu.mp3")
-//	const musicaOpciones=game.sound("musica/mainGame.mp3")
 	var property image = "static/img/fondos/fondoMenu.png" 
 	method configurar(){
 		game.addVisualIn(self,game.at(0,0)) 
@@ -18,7 +16,6 @@ object juegoMenu{
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
 		keyboard.backspace().onPressDo{game.stop()} 
-		//abre la opcion del menu en el que está parada la flecha
 	}
 	
 	method empezar(){
@@ -53,8 +50,6 @@ object flecha{
 	}
 	
 	method opcion()= numero
-
-	//devuelve la opcion del menu dependiendo la posicion en la que está
 
 }
 

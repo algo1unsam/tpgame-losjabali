@@ -4,5 +4,4 @@ import menu2.*
 
 program jabali{
 	juegoMenu.empezar()
-	
 }
