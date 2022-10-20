@@ -8,7 +8,8 @@
 
 ## Capturas
 
-(agregar)
+![Menu principal](https://i.imgur.com/Ip0nyD7.png "Menu principal")
+![Gameplay](https://i.imgur.com/SlVsOlS.png "Gameplay")
 
 ## Reglas de Juego / Instrucciones
 Atrapa todos los Jabalí que te vayan apareciendo antes del minuto.
