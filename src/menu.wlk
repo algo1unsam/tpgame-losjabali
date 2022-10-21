@@ -13,6 +13,7 @@ object juegoMenu{
 		game.addVisual(inicio)
 		game.addVisual(instrucciones)
 		game.addVisual(salir)
+		game.addVisual(opcionMusica)
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
