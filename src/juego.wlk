@@ -57,10 +57,11 @@ object juego {
 		//* Retorna 
 		game.clear()
 		game.addVisualIn(guardia,game.center())
-		// Muestra mensaje
 		wilhelm.play()
+		// Muestra mensaje
 		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
 		nroNivel = 1
+		
 		niveles.clear()
 		game.schedule(3000, {=>juegoMenu.reiniciar()})
 	}

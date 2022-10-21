@@ -17,14 +17,12 @@ object juegoMenu{
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
-		//keyboard.space().onPressDo(self.empezar())
-		//keyboard.backspace().onPressDo{game.stop()} 
+		keyboard.space().onPressDo{game.stop()} 
 	}
 	
 	method empezar(){
 		tablero.configurar()
 		self.configurar()
-		game.start()
 		
 	}
 	method reiniciar(){

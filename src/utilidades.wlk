@@ -68,8 +68,8 @@ object vidas{
 
 class Contador{
 	
-	var property cantidad = cantidadInicial
 	var property cantidadInicial = 12
+	var property cantidad = cantidadInicial
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
 	var property posicion = game.at(posicionX,posicionY)
@@ -114,8 +114,8 @@ object reloj inherits Contador{
 		}
 	}
 	method agregarTiempo(){
-		if ((cantidad+1) <=cantidadInicial){
-			cantidad += 1
+		if ((cantidad+2) <=cantidadInicial){
+			cantidad += 2
 			}
 			else cantidad = cantidadInicial
 		
@@ -140,8 +140,8 @@ class Sonidos{
 }
 
 const atraparJabali = new Sonidos(sonido = "assets/sonidos/jabaliGrito.mp3")
-const wilhelm = new Sonidos(sonido = "assets/sonidos/wilhelm" )
-	
+const wilhelm = new Sonidos(sonido = "assets/sonidos/wilhelm.mp3" )
+
 
 
 
