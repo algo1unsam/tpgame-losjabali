@@ -132,13 +132,16 @@ object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) 
 		cantidad += 200
 	}
 }
-
-object atraparJabali{
+class Sonidos{
+	var sonido 
 	method play(){
-		game.sound("assets/sonidos/jabaliGrito.mp3").play()
+		game.sound(sonido).play()
 	}
 }
 
+const atraparJabali = new Sonidos(sonido = "assets/sonidos/jabaliGrito.mp3")
+const wilhelm = new Sonidos(sonido = "assets/sonidos/wilhelm" )
+	
 
 
 
