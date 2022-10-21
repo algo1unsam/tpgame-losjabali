@@ -14,7 +14,7 @@ object tablero{
 	//* El alto del menú, para que no pise el reloj y las vidas
 	const property altoMenu = 3
 
-	var property imagenFondo="static/img/fondos/tornavias.png"
+	var property imagenFondo="static/img/fondos/tornaviasConBarra.png"
 
 	//* Configuración de dimensiones y fondo
 	method configurar(){
