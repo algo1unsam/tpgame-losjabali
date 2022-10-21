@@ -113,7 +113,13 @@ object reloj inherits Contador{
 			}
 		}
 	}
-	
+	method agregarTiempo(){
+		if ((cantidad+3) <=cantidadInicial){
+			cantidad += 3
+			}
+			else cantidad = cantidadInicial
+		
+	}
 }
 
 //* ##############################

@@ -123,7 +123,7 @@ object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucc
 
 	
 }
-object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", position = game.at(7, 1)){
+	object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", position = game.at(7, 1)){
 	method accion(){
 		game.stop()
 	}
