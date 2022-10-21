@@ -111,6 +111,7 @@ class Nivel{
 		guardia.atrapaAlEnemigo(enemigo)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
+		reloj.agregarTiempo()
 		//atraparJabali.play()
 	}
 	// 4- Chequea si están todos los animales atrapados

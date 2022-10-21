@@ -104,8 +104,8 @@ object inicio inherits OpcionesMenu(image="static/img/menu/cartelIniciar.png",po
 object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucciones.png",position = game.at(7, 4)){
 	var mostrado = false
 	method accion(){
-		game.addVisual("static/img/menu/instrucciones.png")
-		mostrado =! mostrado
+		
+		mostrado = !mostrado
 		if(mostrado){		
 			image = "static/img/menu/instrucciones.png"
 			position = game.at(3, 2)
@@ -124,7 +124,7 @@ object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucc
 
 	
 }
-object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", position = game.at(7, 1)){
+	object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", position = game.at(7, 1)){
 	method accion(){
 		game.stop()
 	}
