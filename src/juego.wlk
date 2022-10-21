@@ -61,7 +61,7 @@ object juego {
 		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
 		nroNivel = 1
 		niveles.clear()
-		game.schedule(5000, {=>juegoMenu.reiniciar()})
+		game.schedule(3000, {=>juegoMenu.reiniciar()})
 	}
 	
 	//* 7- Subir de nivel
@@ -111,6 +111,7 @@ class Nivel{
 		guardia.atrapaAlEnemigo(enemigo)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
+		//atraparJabali.play()
 	}
 	// 4- Chequea si están todos los animales atrapados
 	method chequearFinDeNivel(){

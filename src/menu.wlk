@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import tablero.*
+import utilidades.*
 
 
 object juegoMenu{
@@ -12,22 +13,17 @@ object juegoMenu{
 		game.addVisual(inicio)
 		game.addVisual(instrucciones)
 		game.addVisual(salir)
+		game.addVisual(opcionMusica)
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
-<<<<<<< HEAD:src/menu2.wlk
-		keyboard.space().onPressDo{self.volverMenu()} 
-=======
-		//keyboard.space().onPressDo(self.empezar())
-		//keyboard.backspace().onPressDo{game.stop()} 
->>>>>>> master:src/menu.wlk
+		keyboard.space().onPressDo{game.stop()} 
+
 	}
 	
 	method empezar(){
 		tablero.configurar()
 		self.configurar()
-		game.start()
-		
 	}
 	method volverMenu(){
 		self.configurar()
@@ -107,11 +103,9 @@ object inicio inherits OpcionesMenu(image="static/img/menu/cartelIniciar.png",po
 }
 object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucciones.png",position = game.at(7, 4)){
 	var mostrado = false
-	
 	method accion(){
 		game.addVisual("static/img/menu/instrucciones.png")
-		
-		mostrado = !mostrado
+		mostrado =! mostrado
 		if(mostrado){		
 			image = "static/img/menu/instrucciones.png"
 			position = game.at(3, 2)
@@ -136,3 +130,10 @@ object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", posi
 	}
 }
 
+object opcionMusica{
+
+	method position() = game.at(22,19)
+	
+	method text() = "Pausar Musica P  Reanudar R "
+	method textColor() = 'F80000'
+}

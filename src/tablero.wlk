@@ -22,6 +22,7 @@ object tablero{
   		game.height(alto)
 		game.cellSize(dimensionDeCelda)
   		game.boardGround(imagenFondo)
+  		
 	}
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa

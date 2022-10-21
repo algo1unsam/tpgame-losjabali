@@ -127,3 +127,15 @@ object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) 
 	}
 }
 
+object atraparJabali{
+	method play(){
+		game.sound("assets/sonidos/jabaliGrito.mp3").play()
+	}
+}
+
+
+
+
+
+
+

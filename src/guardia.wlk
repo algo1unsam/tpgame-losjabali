@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import tablero.*
+import utilidades.*
 
 object guardia{
 	var property atrapados = []
@@ -29,6 +30,7 @@ object guardia{
 	method atrapaAlEnemigo(enemigo){
 		atrapados.add(enemigo)
 		game.removeVisual(enemigo)
+			
 	}
 }
  
