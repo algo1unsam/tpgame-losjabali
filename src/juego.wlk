@@ -9,7 +9,7 @@ object juego {
 	
 	// Nivel del juego
 	var property nroNivel = 1
-	const niveles = []
+	const property niveles = []
 	
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
@@ -20,8 +20,6 @@ object juego {
 		tablero.configurar()
   		//* Setea el tíulo
   		game.title("Atrapa El Jabali ")
-  		//* Muestra el título	
-  		game.title()
 	}
 	
 	// 2- Inicia el juego
@@ -67,7 +65,7 @@ object juego {
 		//* Retorna 
 		game.clear()
 		game.addVisualIn(guardia,game.center())
-		wilhelm.play()
+		soundProducer.play("assets/sonidos/wilhelm.mp3")
 		// Muestra mensaje
 		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
 		nroNivel = 1
@@ -124,7 +122,6 @@ class Nivel{
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
 		reloj.agregarTiempo()
-		//atraparJabali.play()
 	}
 	// 4- Chequea si están todos los animales atrapados
 	method chequearFinDeNivel(){

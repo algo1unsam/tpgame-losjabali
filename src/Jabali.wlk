@@ -13,7 +13,14 @@ class Enemigo{
 	
 	//* Reestablece a aleatoria la posición del Enemigo
 	method resetearPosicion(){
-		position = tablero.posicionAleatoria()
+		const nuevaPosicion = tablero.posicionAleatoria()
+		if (nuevaPosicion != position){
+			position = nuevaPosicion
+		}
+		else{
+			self.resetearPosicion()
+		}
+		
 	}
 	// Método que mueve al Jabalí de lugar
 	method mover(){

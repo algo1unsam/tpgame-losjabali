@@ -68,7 +68,7 @@ object vidas{
 
 class Contador{
 	
-	var property cantidadInicial = 12
+	var property cantidadInicial = 3
 	var property cantidad = cantidadInicial
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
@@ -140,16 +140,22 @@ object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) 
 		cantidad += 200
 	}
 }
-class Sonidos{
-	var sonido 
-	method play(){
-		game.sound(sonido).play()
+object soundProducer {
+	var provider = game
+
+	method provider(_provider){
+		provider = _provider
 	}
+	method play(audioFile) = provider.sound(audioFile).play()	
 }
 
-const atraparJabali = new Sonidos(sonido = "assets/sonidos/jabaliGrito.mp3")
-const wilhelm = new Sonidos(sonido = "assets/sonidos/wilhelm.mp3" )
+object soundProviderMock {	
+	method sound(audioFile) = soundMock	
+}
 
+object soundMock {
+	method play(){}
+}
 
 
 
