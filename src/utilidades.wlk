@@ -82,9 +82,9 @@ class Contador{
 	//* Manera en la que va evolucionando el contador
 	method avanzar() {
 		cantidad -= 1
-		self.chequearEstado()
+		
 	}
-	method chequearEstado()
+	method chequearEstado() {}
 	method reiniciar(){	cantidad = cantidadInicial }
 	//* Inicia el contador
 	method iniciar(){
@@ -102,7 +102,10 @@ class Contador{
 //* ########### RELOJ ###########
 //* #############################
 object reloj inherits Contador{
-	
+	override method avanzar(){
+		super()
+		self.chequearEstado()
+	}
 	//* 5- Chequea el tiempo
 	override method chequearEstado(){
 		if (self.cantidad() <= 0){
