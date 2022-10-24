@@ -13,7 +13,14 @@ class Enemigo{
 	
 	//* Reestablece a aleatoria la posición del Enemigo
 	method resetearPosicion(){
-		position = tablero.posicionAleatoria()
+		const nuevaPosicion = tablero.posicionAleatoria()
+		if (nuevaPosicion != position){
+			position = nuevaPosicion
+		}
+		else{
+			self.resetearPosicion()
+		}
+		
 	}
 	// Método que mueve al Jabalí de lugar
 	method mover(){
@@ -52,7 +59,7 @@ class Rata inherits Enemigo{
 		image = "static/img/personajes/rataIzq.png"
 	}
 	method saltar(){
-		const nuevoMovimiento = game.at(position.x() + (-5).randomUpTo(5),position.y() + (-5).randomUpTo(5))
+		const nuevoMovimiento = game.at(position.x() + (-3).randomUpTo(3),position.y() + (-3).randomUpTo(3))
 		if (tablero.posicionValida(nuevoMovimiento)){
 			image = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()	
 			position = nuevoMovimiento

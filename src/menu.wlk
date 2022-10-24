@@ -17,7 +17,8 @@ object juegoMenu{
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
-		keyboard.space().onPressDo{game.stop()} 
+		keyboard.space().onPressDo{game.stop()}
+		
 	}
 	
 	method empezar(){

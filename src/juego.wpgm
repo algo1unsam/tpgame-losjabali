@@ -6,10 +6,9 @@ import utilidades.*
 program jabali{
 	juegoMenu.empezar()
 	const musicaMenu = game.sound("assets/sonidos/elJabali.mp3")
-	musicaMenu.shouldLoop(true)
 	keyboard.p().onPressDo({musicaMenu.pause()})
-	keyboard.r().onPressDo({musicaMenu.resume()})
-	game.schedule(100, {musicaMenu.play()})
+	keyboard.r().onPressDo({musicaMenu.resume()}) 
+	musicaMenu.shouldLoop(true)
+	game.schedule(200, {musicaMenu.play()})
 	game.start()
-	
 }
