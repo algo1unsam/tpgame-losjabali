@@ -20,7 +20,7 @@ class Corazon{
 	
 	
 	//* Imagen y getter del corazón que representa la vida
-	var image = "static/img/utilidades/corazonLleno.png" 
+	var image = "assets/img/utilidades/corazonLleno.png" 
 	method image() = image
 
 	//* Posición
@@ -28,13 +28,13 @@ class Corazon{
 	
 	//* Cambia la imagen del corazón por una de corazón vacío
 	method vaciarCorazon(){
-		image = "static/img/utilidades/corazonVacio.png"
+		image = "assets/img/utilidades/corazonVacio.png"
 		lleno=false
 	}
 
 	//* Cambia la imagen del corazón por una de corazón lleno	
 	method llenarCorazon(){
-		image = "static/img/corazonLleno.png"
+		image = "assets/img/corazonLleno.jpeg"
 		lleno=true
 	}
 }
@@ -80,11 +80,15 @@ class Contador{
 	method textColor() = 'f80000'
 
 	//* Manera en la que va evolucionando el contador
-	method avanzar() { cantidad -= 1 }
+	method avanzar() {
+		cantidad -= 1
+		self.chequearEstado()
+	}
+	method chequearEstado()
 	method reiniciar(){	cantidad = cantidadInicial }
 	//* Inicia el contador
 	method iniciar(){
-		game.onTick(1000,"contador",{self.avanzar()})
+		//game.onTick(1000,"Contador",{self.avanzar()})
 		self.mostrar()
 	}
 	method mostrar(){ game.addVisualIn(self,posicion) }
@@ -100,9 +104,10 @@ class Contador{
 object reloj inherits Contador{
 	
 	//* 5- Chequea el tiempo
-	method chequearTiempo(){
+	override method chequearEstado(){
 		if (self.cantidad() <= 0){
 		//* 1-  Si el reloj llegó a cero chequea cuantas vidas tiene
+		//self.avanzar()
 			if(vidas.chequearVidas()){
 				//* 1.1-  Si aún tiene vidas, reinicia el reloj totalmente y pierde una vida
 				vidas.perderVida()

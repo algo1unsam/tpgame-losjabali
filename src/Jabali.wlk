@@ -52,7 +52,7 @@ class Rata inherits Enemigo{
 		image = "static/img/personajes/rataIzq.png"
 	}
 	method saltar(){
-		const nuevoMovimiento = game.at(position.x() + (-5).randomUpTo(5),position.y() + (-5).randomUpTo(5))
+		const nuevoMovimiento = game.at(position.x() + (-3).randomUpTo(3),position.y() + (-3).randomUpTo(3))
 		if (tablero.posicionValida(nuevoMovimiento)){
 			image = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()	
 			position = nuevoMovimiento

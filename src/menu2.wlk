@@ -1,4 +1,3 @@
-
 import wollok.game.*
 import juego.*
 import tablero.*
@@ -13,16 +12,17 @@ object juegoMenu{
 		game.addVisual(inicio)
 		game.addVisual(instrucciones)
 		game.addVisual(salir)
-		game.addVisual(opcionMusica)
 		keyboard.up().onPressDo{flecha.subir()}
 		keyboard.down().onPressDo{flecha.bajar()}
 		keyboard.enter().onPressDo{self.accionar()} 
-		keyboard.space().onPressDo{game.stop()} 
+		//keyboard.space().onPressDo(self.empezar())
+		//keyboard.backspace().onPressDo{game.stop()} 
 	}
 	
 	method empezar(){
 		tablero.configurar()
 		self.configurar()
+		game.start()
 		
 	}
 	method reiniciar(){
@@ -45,7 +45,7 @@ object juegoMenu{
 	}
 }
 object flecha{
-	const posicionesY= [5,3,1]
+	const posicionesY= [7,4,1]
  	var property numero=0
 
  	method image()="static/img/personajes/jabaliDer.png"
@@ -59,21 +59,21 @@ object flecha{
 	}	
 	
 	method position(){
-		return game.at(2, posicionesY.get(numero))
+		return game.at(3, posicionesY.get(numero))
 	}
 	
 	method opcion()= numero
 
 	method inhabilitar(){
 		posicionesY.clear()
-		posicionesY.add(3)
-		posicionesY.add(3)
-		posicionesY.add(3)
+		posicionesY.add(4)
+		posicionesY.add(4)
+		posicionesY.add(4)
 	}
 	method rehabilitar(){
 		posicionesY.clear()
-		posicionesY.add(5)
-		posicionesY.add(3)
+		posicionesY.add(7)
+		posicionesY.add(4)
 		posicionesY.add(1)
 		numero=1
 	}
@@ -81,9 +81,7 @@ object flecha{
 }
 
 class OpcionesMenu{
-	var property posicionX = 4
-	var property posicionY = 0
-	var property position = game.at(posicionX,posicionY)
+	var property position
 	var property image
 	method iniciar(){		
 		position=game.origin()
@@ -93,14 +91,14 @@ class OpcionesMenu{
 		game.addVisual(self)
 	}
 }
-object inicio inherits OpcionesMenu(image="static/img/menu/cartelIniciar.png",posicionY=5){
+object inicio inherits OpcionesMenu(image="static/img/menu/cartelIniciar.png",position = game.at(7, 7)){
 	method accion(){
 		game.clear()
 		juego.configurar()
 		juego.iniciar()
 	}
 }
-object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucciones.png",posicionY=3){
+object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucciones.png",position = game.at(7, 4)){
 	var mostrado = false
 	
 	method accion(){
@@ -108,14 +106,14 @@ object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucc
 		mostrado = !mostrado
 		if(mostrado){		
 			image = "static/img/menu/instrucciones.png"
-			position = game.at(2, 1)
+			position = game.at(3, 2)
 			salir.position(game.at(-5,-5))
 			flecha.inhabilitar()
 			juegoMenu.inhabilitarOpciones()
 		}else{
-			position = game.at(4, 3)
+			position = game.at(7, 4)
 			image="static/img/menu/cartelInstrucciones.png"
-			salir.position(game.at(4, 1))
+			salir.position(game.at(7, 1))
 			flecha.rehabilitar()
 			juegoMenu.rehabilitarOpciones()
 		}
@@ -124,17 +122,9 @@ object instrucciones inherits OpcionesMenu(image="static/img/menu/cartelInstrucc
 
 	
 }
-	object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", posicionY=1){
+object salir inherits OpcionesMenu(image="static/img/menu/cartelSalir.png", position = game.at(7, 1)){
 	method accion(){
 		game.stop()
 	}
-
 }
 
-object opcionMusica{
-
-	method position() = game.at(game.width()-2,game.height()-1)
-	
-	method text() = "Pausar Musica P  Reanudar R "
-	method textColor() = 'F80000'
-}
