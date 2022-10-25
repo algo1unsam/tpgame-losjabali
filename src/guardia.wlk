@@ -6,7 +6,7 @@ import utilidades.*
 object guardia{
 	var property atrapados = []
 	var property position = game.center()
-	var property imagen = "static/img/personajes/guardiaDer.png"
+	var property imagen = "assets/img/personajes/guardiaDer.png"
 	
 	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
 	method image() = imagen
@@ -18,8 +18,8 @@ object guardia{
 		} 
 	}
 	method configurarTeclas() {		
-		keyboard.right().onPressDo({imagen="static/img/personajes/guardiaDer.png"})
-		keyboard.left().onPressDo({imagen="static/img/personajes/guardiaIzq.png"})
+		keyboard.right().onPressDo({imagen="assets/img/personajes/guardiaDer.png"})
+		keyboard.left().onPressDo({imagen="assets/img/personajes/guardiaIzq.png"})
 	}
 	
 //* #####################################################
