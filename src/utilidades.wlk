@@ -40,7 +40,7 @@ class Corazon{
 }
 //* Objeto que maneja las vidas
 object vidas{
-	const cantidadDeVidas = 12
+	const cantidadDeVidas = 3
 	const vidas=[]
 	
 	method perderVida(){
@@ -68,7 +68,7 @@ object vidas{
 
 class Contador{
 	
-	var property cantidadInicial = 3
+	var property cantidadInicial = 12
 	var property cantidad = cantidadInicial
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
