@@ -80,4 +80,33 @@ describe "tests del juego"{
 		juego.terminarJuego()
 		assert.that(juego.niveles().isEmpty())
 	}
+	test 'atrapar enemigo atrapa un enemigo'{
+		const rata1 = new Rata()
+		const nivel1 = new Nivel(nroNivel= 1)
+		game.addVisual(rata1)
+		nivel1.unEnemigoEsAtrapado(rata1)
+		assert.that(guardia.atrapados().contains(rata1))
+	}
+	test 'crear enemigos crea enemigos'{
+		const nivel1 = new Nivel(nroNivel= 1)
+		assert.equals(nivel1.enemigos().size(),1)
+	}
+	
+}
+describe 'tests del tablero'{
+	test 'Condiciones iniciales del tablero'{
+		assert.equals(tablero.alto(),12)
+		assert.equals(tablero.ancho(),15)
+		assert.equals(tablero.dimensionDeCelda(),75)
+	}
+
+	test'posicion aleatoria devuelve una posicion valida'{
+		const posicion = tablero.posicionAleatoria()
+		assert.that(tablero.posicionValida(posicion))
+	}
+	test 'una posicion fuera del talero no es una posicion valida'{
+		const posicionFalsa = new Position(x= tablero.ancho()+1,y = tablero.alto()+1)
+		assert.notThat(tablero.posicionValida(posicionFalsa))
+	}
+
 }

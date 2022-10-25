@@ -40,7 +40,7 @@ class Corazon{
 }
 //* Objeto que maneja las vidas
 object vidas{
-	const cantidadDeVidas = 3
+	const cantidadDeVidas = 12
 	const vidas=[]
 	
 	method perderVida(){
