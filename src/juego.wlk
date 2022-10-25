@@ -43,7 +43,7 @@ object juego {
 		niveles.add(new Nivel(nroNivel = nroNivel))
 				
 		//* 3.9- Cada un determinado tiempo, el nivel mueve a los enemigo niveles.last().frecuenciaDeMovimiento()
-		game.onTick(250,"El enemigo se mueve",{
+		game.onTick(250,"tiempo",{
 			niveles.last().moverEnemigos()
 			
 			auxiliar++
@@ -56,9 +56,6 @@ object juego {
 		
 		//* 3.10- Cuando el guardia colisiona con los jabalí, le avisa al nivel que un jabalí fue atrapado
 		game.onCollideDo(guardia,{enemigo => niveles.last().unEnemigoEsAtrapado(enemigo)})
-		
-		//* 3.11- Si el tiempo se agota, chequea el tiempo y las vidas
-		//game.onTick(1000,"Chequear tiempo",{reloj.avanzar()})
 	}
 	//* 6- Perder
 	method terminarJuego(){
@@ -77,8 +74,7 @@ object juego {
 	//* 7- Subir de nivel
 	method subirNivel(){
 		nroNivel+=1
-		game.removeTickEvent("El enemigo se mueve")
-		//game.removeTickEvent("Chequear tiempo")
+		game.removeTickEvent("tiempo")
 		self.iniciarNivel()
 	}
 	
