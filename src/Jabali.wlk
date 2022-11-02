@@ -13,7 +13,14 @@ class Enemigo{
 	
 	//* Reestablece a aleatoria la posición del Enemigo
 	method resetearPosicion(){
-		position = tablero.posicionAleatoria()
+		const nuevaPosicion = tablero.posicionAleatoria()
+		if (nuevaPosicion != position){
+			position = nuevaPosicion
+		}
+		else{
+			self.resetearPosicion()
+		}
+		
 	}
 	// Método que mueve al Jabalí de lugar
 	method mover(){
@@ -38,21 +45,21 @@ class Enemigo{
 
 class Jabali inherits Enemigo{
 	method initialize(){
-		imgDer = "static/img/personajes/jabaliDer.png"
-		imgIzq = "static/img/personajes/jabaliIzq.png"
-		image = "static/img/personajes/jabaliIzq.png"
+		imgDer = "assets/img/personajes/jabaliDer.png"
+		imgIzq = "assets/img/personajes/jabaliIzq.png"
+		image = "assets/img/personajes/jabaliIzq.png"
 	}
 	method saltar(){} 		
 }
 
 class Rata inherits Enemigo{
 	method initialize(){
-		imgDer = "static/img/personajes/rataDer.png"
-		imgIzq = "static/img/personajes/rataIzq.png"
-		image = "static/img/personajes/rataIzq.png"
+		imgDer = "assets/img/personajes/rataDer.png"
+		imgIzq = "assets/img/personajes/rataIzq.png"
+		image = "assets/img/personajes/rataIzq.png"
 	}
 	method saltar(){
-		const nuevoMovimiento = game.at(position.x() + (-5).randomUpTo(5),position.y() + (-5).randomUpTo(5))
+		const nuevoMovimiento = game.at(position.x() + (-3).randomUpTo(3),position.y() + (-3).randomUpTo(3))
 		if (tablero.posicionValida(nuevoMovimiento)){
 			image = if(nuevoMovimiento.x()>position.x()) self.imgDer() else self.imgIzq()	
 			position = nuevoMovimiento

@@ -20,7 +20,7 @@ class Corazon{
 	
 	
 	//* Imagen y getter del corazón que representa la vida
-	var image = "static/img/utilidades/corazonLleno.png" 
+	var image = "assets/img/utilidades/corazonLleno.png" 
 	method image() = image
 
 	//* Posición
@@ -28,13 +28,13 @@ class Corazon{
 	
 	//* Cambia la imagen del corazón por una de corazón vacío
 	method vaciarCorazon(){
-		image = "static/img/utilidades/corazonVacio.png"
+		image = "assets/img/utilidades/corazonVacio.png"
 		lleno=false
 	}
 
 	//* Cambia la imagen del corazón por una de corazón lleno	
 	method llenarCorazon(){
-		image = "static/img/corazonLleno.png"
+		image = "assets/img/corazonLleno.jpeg"
 		lleno=true
 	}
 }
@@ -68,8 +68,8 @@ object vidas{
 
 class Contador{
 	
+	var property cantidadInicial = 12
 	var property cantidad = cantidadInicial
-	var property cantidadInicial = 15
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
 	var property posicion = game.at(posicionX,posicionY)
@@ -80,11 +80,15 @@ class Contador{
 	method textColor() = 'f80000'
 
 	//* Manera en la que va evolucionando el contador
-	method avanzar() { cantidad -= 1 }
+	method avanzar() {
+		cantidad -= 1
+		
+	}
+	method chequearEstado() {}
 	method reiniciar(){	cantidad = cantidadInicial }
 	//* Inicia el contador
 	method iniciar(){
-		game.onTick(1000,"contador",{self.avanzar()})
+		//game.onTick(1000,"Contador",{self.avanzar()})
 		self.mostrar()
 	}
 	method mostrar(){ game.addVisualIn(self,posicion) }
@@ -98,11 +102,15 @@ class Contador{
 //* ########### RELOJ ###########
 //* #############################
 object reloj inherits Contador{
-	
+	override method avanzar(){
+		super()
+		self.chequearEstado()
+	}
 	//* 5- Chequea el tiempo
-	method chequearTiempo(){
+	override method chequearEstado(){
 		if (self.cantidad() <= 0){
 		//* 1-  Si el reloj llegó a cero chequea cuantas vidas tiene
+		//self.avanzar()
 			if(vidas.chequearVidas()){
 				//* 1.1-  Si aún tiene vidas, reinicia el reloj totalmente y pierde una vida
 				vidas.perderVida()
@@ -113,7 +121,13 @@ object reloj inherits Contador{
 			}
 		}
 	}
-	
+	method agregarTiempo(){
+		if ((cantidad+2) <=cantidadInicial){
+			cantidad += 2
+			}
+			else cantidad = cantidadInicial
+		
+	}
 }
 
 //* ##############################
@@ -126,4 +140,25 @@ object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) 
 		cantidad += 200
 	}
 }
+object soundProducer {
+	var provider = game
+
+	method provider(_provider){
+		provider = _provider
+	}
+	method play(audioFile) = provider.sound(audioFile).play()	
+}
+
+object soundProviderMock {	
+	method sound(audioFile) = soundMock	
+}
+
+object soundMock {
+	method play(){}
+}
+
+
+
+
+
 

@@ -1,7 +1,14 @@
 import wollok.game.*
 import juego.*
 import menu.*
+import utilidades.*
 
 program jabali{
 	juegoMenu.empezar()
+	const musicaMenu = game.sound("assets/sonidos/elJabali.mp3")
+	keyboard.p().onPressDo({musicaMenu.pause()})
+	keyboard.r().onPressDo({musicaMenu.resume()}) 
+	musicaMenu.shouldLoop(true)
+	game.schedule(200, {musicaMenu.play()})
+	game.start()
 }

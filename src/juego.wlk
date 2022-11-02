@@ -9,7 +9,7 @@ object juego {
 	
 	// Nivel del juego
 	var property nroNivel = 1
-	const niveles = []
+	const property niveles = []
 	
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
@@ -20,8 +20,6 @@ object juego {
 		tablero.configurar()
   		//* Setea el tíulo
   		game.title("Atrapa El Jabali ")
-  		//* Muestra el título	
-  		game.title()
 	}
 	
 	// 2- Inicia el juego
@@ -39,36 +37,44 @@ object juego {
 	
 	// 3- Inicia nivel nuevo
 	method iniciarNivel(){
+		var auxiliar = 0
 		reloj.reiniciar()
 		guardia.atrapados().clear()
 		niveles.add(new Nivel(nroNivel = nroNivel))
 				
-		//* 3.9- Cada un determinado tiempo, el nivel mueve a los enemigo
-		game.onTick(niveles.last().frecuenciaDeMovimiento(),"El enemigo se mueve",{niveles.last().moverEnemigos()})
+		//* 3.9- Cada un determinado tiempo, el nivel mueve a los enemigo niveles.last().frecuenciaDeMovimiento()
+		game.onTick(250,"tiempo",{
+			niveles.last().moverEnemigos()
+			
+			auxiliar++
+			if(auxiliar==4){
+				auxiliar = 0
+				reloj.avanzar()
+				puntos.avanzar()
+			}
+		})
 		
 		//* 3.10- Cuando el guardia colisiona con los jabalí, le avisa al nivel que un jabalí fue atrapado
 		game.onCollideDo(guardia,{enemigo => niveles.last().unEnemigoEsAtrapado(enemigo)})
-		
-		//* 3.11- Si el tiempo se agota, chequea el tiempo y las vidas
-		game.onTick(1000,"Chequear tiempo",{reloj.chequearTiempo()})
 	}
 	//* 6- Perder
 	method terminarJuego(){
 		//* Retorna 
 		game.clear()
 		game.addVisualIn(guardia,game.center())
+		soundProducer.play("assets/sonidos/wilhelm.mp3")
 		// Muestra mensaje
-		game.say(guardia,puntos.cantidad().toString())
+		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
 		nroNivel = 1
+		
 		niveles.clear()
-		juegoMenu.reiniciar()
+		game.schedule(3000, {=>juegoMenu.reiniciar()})
 	}
 	
 	//* 7- Subir de nivel
 	method subirNivel(){
 		nroNivel+=1
-		game.removeTickEvent("El enemigo se mueve")
-		game.removeTickEvent("Chequear tiempo")
+		game.removeTickEvent("tiempo")
 		self.iniciarNivel()
 	}
 	
@@ -82,7 +88,7 @@ object juego {
 class Nivel{
 	var property enemigos = []
 	var property nroNivel
-	var property frecuenciaDeMovimiento = 100/nroNivel
+	var property frecuenciaDeMovimiento = 500/nroNivel
 	
 	method initialize(){
 		self.crearEnemigos()
@@ -111,6 +117,7 @@ class Nivel{
 		guardia.atrapaAlEnemigo(enemigo)
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
+		reloj.agregarTiempo()
 	}
 	// 4- Chequea si están todos los animales atrapados
 	method chequearFinDeNivel(){

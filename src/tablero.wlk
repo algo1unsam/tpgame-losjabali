@@ -7,12 +7,12 @@ import utilidades.*
 object tablero{
 	
 	//* Dimensiones del mapa
-	const property alto = 20
-	const property ancho = 25
-	const property dimensionDeCelda = 45
+	const property alto = 12
+	const property ancho = 15
+	const property dimensionDeCelda = 75
 	
 	//* El alto del menú, para que no pise el reloj y las vidas
-	const property altoMenu = 3
+	const property altoMenu = 2
 
 	var property imagenFondo="static/img/fondos/tornaviasConBarra.png"
 
@@ -22,6 +22,7 @@ object tablero{
   		game.height(alto)
 		game.cellSize(dimensionDeCelda)
   		game.boardGround(imagenFondo)
+  		
 	}
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa
