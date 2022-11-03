@@ -63,7 +63,7 @@ object juego {
 			if(cuartoDeSegundo==4){
 				cuartoDeSegundo = 0
 				reloj.avanzar()
-				puntos.avanzar()
+				//puntos.avanzar()
 			}
 		})
 		
@@ -97,7 +97,8 @@ object juego {
 	}
 	
 	method atraparTodosLosEnemigos(){
-		niveles.last().enemigos().forEach{enemigo=>niveles.last().unEnemigoEsAtrapado(guardia,enemigo)}
+		//game.allVisuals().filter{elemento=>elemento.esEnemigo()}.forEach{niveles.last().unEnemigoEsAtrapado(guardia,it)}
+		niveles.last().enemigos().filter{enemigo=>game.hasVisual(enemigo)}.forEach{enemigo=>niveles.last().unEnemigoEsAtrapado(guardia,enemigo)}
 	}
 	
 	method volverAlMenu(){
@@ -147,6 +148,7 @@ class Nivel{
 	//* 4- Es ejecutado cuando se atrapa un Jabali
 	method unEnemigoEsAtrapado(trampaOGuardia,enemigo){
 		//* 4.1- El guardia atrapa al jabali
+		puntos.avanzar()
 		trampaOGuardia.atrapaAlEnemigo(enemigo)		
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()

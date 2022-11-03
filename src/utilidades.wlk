@@ -10,7 +10,7 @@ class Corazon{
 	
 	// ID del corazón
 	const property id = 0
-	
+	const property esEnemigo = false
 	//* Determina si el corazón está o no lleno
 	var property lleno = true
 	
@@ -73,7 +73,7 @@ class Contador{
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
 	var property posicion = game.at(posicionX,posicionY)
-	
+	const property esEnemigo = false
 	//* Función que toma Wollok para cargar el tiempo
 	method text() = cantidad.toString()
 	//* Función que toma Wollok para cambair el color del texto
@@ -87,7 +87,6 @@ class Contador{
 	method reiniciar(){	cantidad = cantidadInicial }
 	//* Inicia el contador
 	method iniciar(){
-		//game.onTick(1000,"Contador",{self.avanzar()})
 		self.mostrar()
 	}
 	method mostrar(){ game.addVisualIn(self,posicion) }
