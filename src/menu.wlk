@@ -2,33 +2,26 @@
 import wollok.game.*
 import juego.*
 import tablero.*
+import teclado.*
 
-
-object juegoMenu{
+object menu{
 	const property opciones=[inicio,instrucciones,salir] //opciones que tiene el menu
 	var property image = "assets/img/fondos/fondoMenu.png"
-	 
-	method configurar(){
+	
+	method mostrar(){
 		game.addVisualIn(self,game.at(0,0)) 
 		game.addVisual(flecha)
 		game.addVisual(titulo)
 		game.addVisual(inicio)
 		game.addVisual(instrucciones)
 		game.addVisual(salir)
-		game.addVisual(opcionMusica)
-		keyboard.up().onPressDo{flecha.subir()}
-		keyboard.down().onPressDo{flecha.bajar()}
-		keyboard.enter().onPressDo{self.accionar()} 
-		keyboard.space().onPressDo{game.stop()}
-	}
-	
-	method empezar(){
-		tablero.configurar()
-		self.configurar()
+		game.addVisual(textoConfiguracionTeclado)
 		
 	}
 	method reiniciar(){
-		self.configurar()
+		teclado.configurarTeclasMenu()
+		teclado.configurarTeclasGenerales()
+		self.mostrar()
 	}
 	
 	method accionar(){
@@ -49,6 +42,8 @@ object juegoMenu{
 		opciones.add(salir)
 	}
 }
+
+
 object flecha{
 	const posicionesY= [5,3,1]
  	var property numero=0
@@ -101,7 +96,6 @@ class OpcionesMenu{
 object inicio inherits OpcionesMenu(image="assets/img/menu/cartelIniciar.png",posicionY=5){
 	method accion(){
 		game.clear()
-		juego.configurar()
 		juego.iniciar()
 	}
 }
@@ -116,31 +110,31 @@ object instrucciones inherits OpcionesMenu(image="assets/img/menu/cartelInstrucc
 			position = game.at(2, 1)
 			salir.position(game.at(-5,-5))
 			flecha.inhabilitar()
-			juegoMenu.inhabilitarOpciones()
+			menu.inhabilitarOpciones()
 		}else{
 			position = game.at(4, 3)
 			image="assets/img/menu/cartelInstrucciones.png"
 			salir.position(game.at(4, 1))
 			flecha.rehabilitar()
-			juegoMenu.rehabilitarOpciones()
+			menu.rehabilitarOpciones()
 		}
 
 	}
 
 	
 }
-	object salir inherits OpcionesMenu(image="assets/img/menu/cartelSalir.png", posicionY=1){
+
+object salir inherits OpcionesMenu(image="assets/img/menu/cartelSalir.png", posicionY=1){
 	method accion(){
 		game.stop()
 	}
-
 }
 
-object opcionMusica{
+object textoConfiguracionTeclado{
 
-	method position() = game.at(game.width()-2,game.height()-1)
+	method position() = game.at(1,game.height()-1)
 	
-	method text() = "Pausar Musica P | Reanudar R "
+	method text() = "Musica: Pausar P | Reanudar R"
 	method textColor() = 'F80000'
 }
 

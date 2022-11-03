@@ -71,12 +71,10 @@ describe "tests del juego"{
 		assert.equals(juego.nroNivel(),2)
 		}
 	test 'terminar el juego resetea el nivel'{
-		soundProducer.provider(soundProviderMock)
 		juego.terminarJuego()
 		assert.equals(juego.nroNivel(),1)
 	}
 	test 'terminar el juego borra los niveles'{
-		soundProducer.provider(soundProviderMock)
 		juego.terminarJuego()
 		assert.that(juego.niveles().isEmpty())
 	}
@@ -84,7 +82,7 @@ describe "tests del juego"{
 		const rata1 = new Rata()
 		const nivel1 = new Nivel(nroNivel= 1)
 		game.addVisual(rata1)
-		nivel1.unEnemigoEsAtrapado(rata1)
+		nivel1.unEnemigoEsAtrapado(guardia,rata1)
 		assert.that(guardia.atrapados().contains(rata1))
 	}
 	test 'crear enemigos crea enemigos'{

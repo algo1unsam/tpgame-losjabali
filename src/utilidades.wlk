@@ -15,7 +15,7 @@ class Corazon{
 	var property lleno = true
 	
 	//* Posición en X e Y del corazón
-	var property posicionX = 1
+	var property posicionX = 0
 	const posicionY = game.height()-1
 	
 	
@@ -48,7 +48,7 @@ object vidas{
 	}
 	
 	method crearVidas(){
-		cantidadDeVidas.times({i => vidas.add(new Corazon(posicionX = i+1))})
+		cantidadDeVidas.times({i => vidas.add(new Corazon(posicionX = i-1))})
 	}
 	
 	method mostrarCorazones(){
@@ -68,7 +68,7 @@ object vidas{
 
 class Contador{
 	
-	var property cantidadInicial = 12
+	var property cantidadInicial = 10
 	var property cantidad = cantidadInicial
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
@@ -82,7 +82,6 @@ class Contador{
 	//* Manera en la que va evolucionando el contador
 	method avanzar() {
 		cantidad -= 1
-		
 	}
 	method chequearEstado() {}
 	method reiniciar(){	cantidad = cantidadInicial }
@@ -137,25 +136,10 @@ object reloj inherits Contador{
 object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) {
 	//*1-  Hace que los puntos sean crecientes
 	override method avanzar() {
-		cantidad += 200
+		cantidad += 20
 	}
 }
-object soundProducer {
-	var provider = game
 
-	method provider(_provider){
-		provider = _provider
-	}
-	method play(audioFile) = provider.sound(audioFile).play()	
-}
-
-object soundProviderMock {	
-	method sound(audioFile) = soundMock	
-}
-
-object soundMock {
-	method play(){}
-}
 
 
 

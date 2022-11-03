@@ -1,29 +1,34 @@
-//* Importaciones
 import wollok.game.*
-import juego.*
-import menus.*
 import guardia.*
+import Jabali.*
+import utilidades.*
+import juego.*
+import musica.*
+import menu.*
 
-/*
-!FIXME: HAY QUE ADAPTARLO A NUESTRO JUEGO, ELIMINE LAS TECLAS DEL GUARDIA PORQUE NO HACEN FALTA
-object teclado {
-
-	method configurarTeclasMenuInicial() {		
-		// Tecla Finalizar Juego
-		keyboard.alt().onPressDo({ juego.finalizarJuego()})
+object teclado{
+	
+	method configurarTeclasMenu(){
+		keyboard.up().onPressDo{flecha.subir()}
+		keyboard.down().onPressDo{flecha.bajar()}
+		keyboard.enter().onPressDo{menu.accionar()} 
 	}
 
-	method configurarTeclaContinuar() {
-		// Tecla Inicio Juego
-		keyboard.space().onPressDo({ juego.iniciar()})
+	method configurarTeclasGenerales(){
+		keyboard.p().onPressDo({musica.pausar()})
+		keyboard.r().onPressDo({musica.reproducir()})
+		keyboard.backspace().onPressDo{game.stop()}
 	}
-
-	method configurarTeclasMenuFinal() {
-		// Tecla Menu Inicial
-		keyboard.space().onPressDo({ juego.iniciar()})
-		// Tecla Finalizar Juego
-		keyboard.alt().onPressDo({ juego.finalizarJuego()})
+	
+	method configurarTeclasGuardia(){
+		keyboard.right().onPressDo({guardia.mirarDerecha()})
+		keyboard.left().onPressDo({guardia.mirarIzquierda()})
+		keyboard.space().onPressDo({guardia.dejarTrampa()})
+		
+		//* Teclas hack
+		keyboard.s().onPressDo({juego.atraparTodosLosEnemigos()})
+		keyboard.m().onPressDo{juego.volverAlMenu()}
 	}
 }
- 
- */
+
+

@@ -4,80 +4,111 @@ import Jabali.*
 import utilidades.*
 import tablero.*
 import menu.*
+import potenciadores.*
+import musica.*
+import teclado.*
 
 object juego {
 	
 	// Nivel del juego
 	var property nroNivel = 1
 	const property niveles = []
-	
+	var property image = "assets/img/fondos/tornaviasConBarra.png"
+	const property esEnemigo = false
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
 //* ##########################################
 	
-	// 1- Configura el ancho, alto, tamaño de celda, título y fondo 
-	method configurar(){
-		tablero.configurar()
-  		//* Setea el tíulo
-  		game.title("Atrapa El Jabali ")
-	}
+
 	
-	// 2- Inicia el juego
+	//* 1- Inicia el juego
 	method iniciar(){
+		game.clear()
+		//musica.pausar()
+		game.addVisualIn(self,game.at(0,0)) 
+		//* Inicializa guardia
 		tablero.agregarPersonajeMobible(guardia)
-		guardia.configurarTeclas()
-		reloj.iniciar()
-		puntos.iniciar()
+		teclado.configurarTeclasGuardia()
+		teclado.configurarTeclasGenerales()
+		guardia.equiparse()
+		
+		//* Inicializa vidas
 		vidas.crearVidas()
 		vidas.mostrarCorazones()
-		//* 2.1- Configura el inicio del nivel
+		
+		//* Inicializa contadores
+		reloj.iniciar()
+		puntos.iniciar()
+		
 		self.iniciarNivel()
-
 	}
 	
-	// 3- Inicia nivel nuevo
+	//* 2- Inicializa Las condiciones del nivel
 	method iniciarNivel(){
-		var auxiliar = 0
+		if(nroNivel>19){
+			image = "assets/img/fondos/mordor.jpg"
+		}
+		var cuartoDeSegundo = 0
+		
+		
 		reloj.reiniciar()
+		
 		guardia.atrapados().clear()
-		niveles.add(new Nivel(nroNivel = nroNivel))
 				
-		//* 3.9- Cada un determinado tiempo, el nivel mueve a los enemigo niveles.last().frecuenciaDeMovimiento()
+		//* 2.1- Cada un determinado tiempo, el nivel mueve a los enemigo niveles.last().frecuenciaDeMovimiento()
 		game.onTick(250,"tiempo",{
 			niveles.last().moverEnemigos()
 			
-			auxiliar++
-			if(auxiliar==4){
-				auxiliar = 0
+			cuartoDeSegundo++
+			if(cuartoDeSegundo==4){
+				cuartoDeSegundo = 0
 				reloj.avanzar()
 				puntos.avanzar()
 			}
 		})
 		
-		//* 3.10- Cuando el guardia colisiona con los jabalí, le avisa al nivel que un jabalí fue atrapado
-		game.onCollideDo(guardia,{enemigo => niveles.last().unEnemigoEsAtrapado(enemigo)})
+		//* 2.2- Cuando el guardia o las trampas colisionan con los jabalí, le avisa al nivel que un jabalí fue atrapado
+		game.onCollideDo(guardia,{enemigo => niveles.last().unEnemigoEsAtrapado(guardia,enemigo)})
+		trampas.trampas().forEach{trampa=> game.onCollideDo(trampa,{enemigo=>niveles.last().unEnemigoEsAtrapado(trampa,enemigo)})}
+		
+		niveles.add(new Nivel(nroNivel = nroNivel))
 	}
-	//* 6- Perder
+
+	//* 3- Perder
 	method terminarJuego(){
 		//* Retorna 
 		game.clear()
 		game.addVisualIn(guardia,game.center())
-		soundProducer.play("assets/sonidos/wilhelm.mp3")
-		// Muestra mensaje
-		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
-		nroNivel = 1
+		musica.reproducirGrito()
 		
-		niveles.clear()
-		game.schedule(3000, {=>juegoMenu.reiniciar()})
+		//* Muestra mensaje
+		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
+		
+		//* Deja 5 segundos para que el jugador pueda ver el puntaje
+		game.schedule(5000, {=>self.volverAlMenu()})
 	}
 	
 	//* 7- Subir de nivel
 	method subirNivel(){
 		nroNivel+=1
 		game.removeTickEvent("tiempo")
+		trampas.recojerTodas()
 		self.iniciarNivel()
 	}
 	
+	method atraparTodosLosEnemigos(){
+		niveles.last().enemigos().forEach{enemigo=>niveles.last().unEnemigoEsAtrapado(guardia,enemigo)}
+	}
+	
+	method volverAlMenu(){
+		//* Reinicia los niveles
+		nroNivel = 1
+		niveles.clear()
+
+		game.clear()
+
+		menu.reiniciar()
+	}
 }
 
 
@@ -90,9 +121,11 @@ class Nivel{
 	var property nroNivel
 	var property frecuenciaDeMovimiento = 500/nroNivel
 	
+
 	method initialize(){
 		self.crearEnemigos()
 		self.moverEnemigos()
+		
 	}
 	// 3.1- Spawnea los jabalies en el mapa
 	method crearEnemigos(){
@@ -112,9 +145,9 @@ class Nivel{
 	method todosAtrapados() = enemigos.all{enemigo => enemigo.estaAtrapado()}	
 	
 	//* 4- Es ejecutado cuando se atrapa un Jabali
-	method unEnemigoEsAtrapado(enemigo){
+	method unEnemigoEsAtrapado(trampaOGuardia,enemigo){
 		//* 4.1- El guardia atrapa al jabali
-		guardia.atrapaAlEnemigo(enemigo)
+		trampaOGuardia.atrapaAlEnemigo(enemigo)		
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
 		self.chequearFinDeNivel()
 		reloj.agregarTiempo()

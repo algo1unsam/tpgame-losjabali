@@ -2,13 +2,23 @@ import wollok.game.*
 import juego.*
 import menu.*
 import utilidades.*
+import teclado.*
+import musica.*
+import tablero.*
 
 program jabali{
-	juegoMenu.empezar()
-	const musicaMenu = game.sound("assets/sonidos/elJabali.mp3")
-	keyboard.p().onPressDo({musicaMenu.pause()})
-	keyboard.r().onPressDo({musicaMenu.resume()}) 
-	musicaMenu.shouldLoop(true)
-	game.schedule(200, {musicaMenu.play()})
+	//* Setea el tíulo
+  	game.title("Atrapa El Jabali ")
+	
+	tablero.configurar()
+	
+	teclado.configurarTeclasMenu()
+	teclado.configurarTeclasGenerales()
+	
+	menu.mostrar()
+
+	//musica.iniciar()
+
 	game.start()
+
 }

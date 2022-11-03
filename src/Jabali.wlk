@@ -5,6 +5,7 @@ import guardia.*
 
 class Enemigo{
 	//* Inicia la posición del Jabalí en aleatoria, también se usa en inglés porque WollokGame lo consume
+	const property esEnemigo = true
 	var property position = tablero.posicionAleatoria()
 	var property atrapado = false
 	var property imgDer
@@ -51,6 +52,7 @@ class Jabali inherits Enemigo{
 	}
 	method saltar(){} 		
 }
+
 
 class Rata inherits Enemigo{
 	method initialize(){

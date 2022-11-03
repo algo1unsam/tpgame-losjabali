@@ -14,15 +14,14 @@ object tablero{
 	//* El alto del menú, para que no pise el reloj y las vidas
 	const property altoMenu = 2
 
-	var property imagenFondo="static/img/fondos/tornaviasConBarra.png"
+	var property imagenFondo="assets/img/fondos/tornaviasConBarra.png"
 
 	//* Configuración de dimensiones y fondo
 	method configurar(){
 		game.width(ancho)
   		game.height(alto)
 		game.cellSize(dimensionDeCelda)
-  		game.boardGround(imagenFondo)
-  		
+  		//game.boardGround(imagenFondo)
 	}
 
 	//* - Devuelve true o false dependiendo de si la posición se ubica dentro o fuera del mapa

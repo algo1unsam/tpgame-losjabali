@@ -2,14 +2,16 @@ import wollok.game.*
 import juego.*
 import tablero.*
 import utilidades.*
+import potenciadores.*
+import teclado.*
 
 object guardia{
+	const property esEnemigo = false
 	var property atrapados = []
-	var property trampas = []
 	
 	var property position = game.center()
 	var property imagen = "assets/img/personajes/guardiaDer.png"
-	
+	var property miraDerecha = true
 	//* Imagen del Guardia, el método es en inglés porque lo usa Wollok Game desde el método addVisualCharacterIn(guardia, game.center())
 	method image() = imagen
 	
@@ -19,18 +21,34 @@ object guardia{
 			position = nuevaPosicion
 		} 
 	}
-	method configurarTeclas() {		
-		keyboard.right().onPressDo({imagen="assets/img/personajes/guardiaDer.png"})
-		keyboard.left().onPressDo({imagen="assets/img/personajes/guardiaIzq.png"})
+	method posicion() = position
+	
+	method direccionX(){
+		if(self.miraDerecha()){
+			return self.position().x()+1
+		}else{
+			return self.position().x()-1
+		}
+	}
+	
+	method mirarIzquierda(){
+		imagen="assets/img/personajes/guardiaIzq.png"
+		miraDerecha=false
+	}
+	method mirarDerecha(){
+		imagen="assets/img/personajes/guardiaDer.png"
+		miraDerecha=true
 	}
 	
 	method equiparse(){
-		2.times({i => trampas.add(new TrampaDeOsos(posicionInicial=game.at(game.height()-1,4+i))})
+		//2.times({i => trampas.add(new TrampaDeOsos(posicionInicial=game.at(game.height()-1,4+i)))})
+		trampas.crear()
+		trampas.mostrar()
 	}
 	method dejarTrampa(){
-		//TODO: chequear si tiene trampas
-		trampas.anyOne().colocarse(position)
+		trampas.colocar()
 	}
+
 	
 //* #####################################################
 //* ######## FUNCIONES DE LOS JABALIES ATRAPADOS ########
@@ -38,8 +56,11 @@ object guardia{
 
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
 	method atrapaAlEnemigo(enemigo){
-		atrapados.add(enemigo)
-		game.removeVisual(enemigo)
+		if(enemigo.esEnemigo()){
+			atrapados.add(enemigo)
+			game.removeVisual(enemigo)
+			
+		}
 			
 	}
 }
@@ -55,24 +76,6 @@ object guardia{
 		// Usar la trampa o el carrito, puede ser con la barra espaciadora, se remueve de su lista de adicionales
 	}
 */
-
-
-class TrampaDeOsos {
-	const property image = 'static/img/personajes/guardiaDer.png'
-	var property position = posicionInicial
-	var posicionInicial
-	
-	method initialize(){
-		game.addVisual(self)
-	}
-	method colocarse(posicion){
-		position = posicion
-	}
-	method levantarse(){
-		position = posicionInicial
-	}
-	
-}
  
  
 
