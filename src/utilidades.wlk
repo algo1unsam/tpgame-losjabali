@@ -1,6 +1,6 @@
 import wollok.game.*
 import juego.*
-
+import musica.*
 
 //* ##########################################
 //* ###### FUNCIONES DE VIDAS DEL JUEGO ######
@@ -68,7 +68,7 @@ object vidas{
 
 class Contador{
 	
-	var property cantidadInicial = 10
+	var property cantidadInicial = 1
 	var property cantidad = cantidadInicial
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
@@ -115,6 +115,7 @@ object reloj inherits Contador{
 				self.reiniciar()			
 			}else{				
 				//* 1.2- Si no tiene vidas. pierde
+				musica.reproducirGrito()
 				juego.terminarJuego()
 			}
 		}

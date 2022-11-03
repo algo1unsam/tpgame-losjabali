@@ -17,7 +17,7 @@ program jabali{
 	
 	menu.mostrar()
 
-	//musica.iniciar()
+	musica.iniciar()
 
 	game.start()
 

@@ -6,6 +6,8 @@ import juego.*
 
 object musica{
 	const musicaMenu = game.sound("assets/sonidos/elJabali.mp3")
+	const sonidoGrito = game.sound("assets/sonidos/wilhelm.mp3")
+
 	method pausar(){
 		if(!musicaMenu.paused()){
 			musicaMenu.pause()
@@ -22,7 +24,9 @@ object musica{
 	}
 	
 	method reproducirGrito(){
-		game.sound("assets/sonidos/wilhelm.mp3").play()	
+		//game.schedule(1000,{sonidoGrito.play()})
+		sonidoGrito.play()
+		//game.removeTickEvent("sonidoGrito")
 	}
 
 }

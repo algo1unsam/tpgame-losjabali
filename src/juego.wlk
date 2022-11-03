@@ -76,11 +76,11 @@ object juego {
 
 	//* 3- Perder
 	method terminarJuego(){
-		//* Retorna 
+		//* Retorna a la pantalla de inicio
 		game.clear()
+
+		game.addVisualIn(menu,game.at(0,0))
 		game.addVisualIn(guardia,game.center())
-		musica.reproducirGrito()
-		
 		//* Muestra mensaje
 		game.say(guardia,puntos.cantidad().toString() + "    GAME OVER")
 		
@@ -103,12 +103,15 @@ object juego {
 	
 	method volverAlMenu(){
 		//* Reinicia los niveles
-		nroNivel = 1
-		niveles.clear()
+		self.reiniciarNiveles()
 
 		game.clear()
 
 		menu.reiniciar()
+	}
+	method reiniciarNiveles(){
+		nroNivel = 1
+		niveles.clear()
 	}
 }
 
