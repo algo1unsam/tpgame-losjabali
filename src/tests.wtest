@@ -1,6 +1,110 @@
+import guardia.*
+import Jabali.*
+import utilidades.*
+import tablero.*
+import menu.*
+import wollok.game.*
+import juego.*
 
-test "testX" {
+describe "Tests del guardia"{
+	test "condiciones iniciales del guardia" {
+		assert.that(guardia.atrapados().isEmpty())
+		assert.equals(guardia.position(),game.center())	
+	}
+	test "El guardia atrapa un enemigo"{
+		const jabali1 = new Jabali()
+		game.addVisual(jabali1)
+		guardia.atrapaAlEnemigo(jabali1)
+		assert.that(guardia.atrapados().contains(jabali1))
+	}
+}
+describe "Tests de los enemigos"{
+	test "condiciones iniciales de los enemigos"{
+		const jabali1 = new Jabali()
+		assert.notThat(jabali1.atrapado())
+	}
+	test "Resetear posicion debe cambiar la posicion"{
+		const jabali1 = new Jabali()
+		const posicionInicial = jabali1.position()
+		jabali1.resetearPosicion()
+		assert.notEquals(posicionInicial,jabali1.position())
+		
+	}
+	test "el jabali se mueve de a 1"{
+		const jabali1 = new Jabali()
+		const posicionInicial = jabali1.position()
+		jabali1.mover()
+		assert.that((posicionInicial.x()-jabali1.position().x()).abs()<= 1 and 
+				(posicionInicial.y()-jabali1.position().y()).abs()<= 1)	
+	}
+	test "la rata salta de a 3"{
+		const rata1 = new Rata()
+		const posicionInicial = rata1.position()
+		rata1.saltar()
+		assert.that((posicionInicial.x()-rata1.position().x()).abs()<= 3 and 
+				(posicionInicial.y()-rata1.position().y()).abs()<= 3)	
+	}
+	test 'el enemigo esta atrapado'{
+		const rata1 = new Rata()
+		game.addVisual(rata1)
+		guardia.atrapaAlEnemigo(rata1)
+		assert.that(rata1.estaAtrapado())
 
-	assert.that(true)
+	}
+}
+describe "tests del juego"{
+	test 'Condiciones iniciales del juego'{
+		assert.that(juego.niveles().isEmpty())
+		assert.equals(juego.nroNivel(),1)
+	}
+	test 'Un nuevo nivel borra los enemigos atrapados'{
+		const rata1 = new Rata()
+		game.addVisual(rata1)
+		game.addVisual(guardia)
+		guardia.atrapaAlEnemigo(rata1)
+		juego.iniciarNivel()
+		assert.that(guardia.atrapados().isEmpty())
+	}
+	test 'Pasar de nivel aumenta el numero de nivel'{
+		game.addVisual(guardia)
+		juego.subirNivel()
+		assert.equals(juego.nroNivel(),2)
+		}
+	test 'terminar el juego resetea el nivel'{
+		juego.terminarJuego()
+		assert.equals(juego.nroNivel(),1)
+	}
+	test 'terminar el juego borra los niveles'{
+		juego.terminarJuego()
+		assert.that(juego.niveles().isEmpty())
+	}
+	test 'atrapar enemigo atrapa un enemigo'{
+		const rata1 = new Rata()
+		const nivel1 = new Nivel(nroNivel= 1)
+		game.addVisual(rata1)
+		nivel1.unEnemigoEsAtrapado(guardia,rata1)
+		assert.that(guardia.atrapados().contains(rata1))
+	}
+	test 'crear enemigos crea enemigos'{
+		const nivel1 = new Nivel(nroNivel= 1)
+		assert.equals(nivel1.enemigos().size(),1)
+	}
+	
+}
+describe 'tests del tablero'{
+	test 'Condiciones iniciales del tablero'{
+		assert.equals(tablero.alto(),12)
+		assert.equals(tablero.ancho(),15)
+		assert.equals(tablero.dimensionDeCelda(),75)
+	}
+
+	test'posicion aleatoria devuelve una posicion valida'{
+		const posicion = tablero.posicionAleatoria()
+		assert.that(tablero.posicionValida(posicion))
+	}
+	test 'una posicion fuera del talero no es una posicion valida'{
+		const posicionFalsa = new Position(x= tablero.ancho()+1,y = tablero.alto()+1)
+		assert.notThat(tablero.posicionValida(posicionFalsa))
+	}
 
 }

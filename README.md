@@ -1,22 +1,23 @@
-# Nombre del juego (<- borrar y completar)
+# Atrapa al Jabalí :cop: :boar:
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Estevez, Gonzalo
+- Narvaez, Agustín
+- Venturini, Tomás
 
 ## Capturas
 
-(agregar)
+![Menu principal](https://i.imgur.com/Ip0nyD7.png "Menu principal")
+![Gameplay](https://i.imgur.com/SlVsOlS.png "Gameplay")
 
 ## Reglas de Juego / Instrucciones
-
-(Escribirlas)
+Atrapa todos los Jabalí que te vayan apareciendo antes del minuto.
+Amedida que subas de nivel, irán apareciendo mas y más Jabalíes!
 
 
 ## Otros
 
-- Curso/Facultad
+- Algoritmos I, Universidad Nacional de San Martín
 - Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Una vez terminado, no tenemos problemas en que el repositorio sea público

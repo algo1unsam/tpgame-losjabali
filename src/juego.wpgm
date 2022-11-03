@@ -1,8 +1,24 @@
 import wollok.game.*
-import pepita.*
+import juego.*
+import menu.*
+import utilidades.*
+import teclado.*
+import musica.*
+import tablero.*
 
-program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+program jabali{
+	//* Setea el tíulo
+  	game.title("Atrapa El Jabali ")
+	
+	tablero.configurar()
+	
+	teclado.configurarTeclasMenu()
+	teclado.configurarTeclasGenerales()
+	
+	menu.mostrar()
+
+	musica.iniciar()
+
 	game.start()
+
 }
