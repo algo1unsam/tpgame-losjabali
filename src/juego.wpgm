@@ -20,5 +20,4 @@ program jabali{
 	musica.iniciar()
 
 	game.start()
-
 }

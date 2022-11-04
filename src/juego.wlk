@@ -18,13 +18,10 @@ object juego {
 //* ##########################################
 //* ##### FUNCIONES DE CONTROL DEL JUEGO #####
 //* ##########################################
-	
 
-	
 	//* 1- Inicia el juego
 	method iniciar(){
 		game.clear()
-		//musica.pausar()
 		game.addVisualIn(self,game.at(0,0)) 
 		//* Inicializa guardia
 		tablero.agregarPersonajeMobible(guardia)
@@ -50,10 +47,9 @@ object juego {
 		}
 		var cuartoDeSegundo = 0
 		
-		
 		reloj.reiniciar()
 		
-		guardia.atrapados().clear()
+		//guardia.atrapados().clear()
 				
 		//* 2.1- Cada un determinado tiempo, el nivel mueve a los enemigo niveles.last().frecuenciaDeMovimiento()
 		game.onTick(250,"tiempo",{
@@ -63,7 +59,6 @@ object juego {
 			if(cuartoDeSegundo==4){
 				cuartoDeSegundo = 0
 				reloj.avanzar()
-				//puntos.avanzar()
 			}
 		})
 		
@@ -92,6 +87,7 @@ object juego {
 	method subirNivel(){
 		nroNivel+=1
 		game.removeTickEvent("tiempo")
+		//guardia.cantidadAtrapados(0)
 		trampas.recojerTodas()
 		self.iniciarNivel()
 	}
@@ -142,11 +138,9 @@ class Nivel{
 	// 3.2- Mueve los jabalies
 	method moverEnemigos(){ 
 		enemigos.forEach({enemigo => enemigo.mover()})
-		enemigos.forEach({enemigo => enemigo.saltar()})
-		
 	}
 	// 3.3.1- Chequea si están todos los jabalies atrapados
-	method todosAtrapados() = enemigos.all{enemigo => enemigo.estaAtrapado()}	
+	method todosAtrapados() = enemigos.size() == 0	
 	
 	//* 4- Es ejecutado cuando se atrapa un Jabali
 	method unEnemigoEsAtrapado(trampaOGuardia,enemigo){
@@ -154,8 +148,9 @@ class Nivel{
 		puntos.avanzar()
 		trampaOGuardia.atrapaAlEnemigo(enemigo)		
 		//* 4.2-  Chequea si todos los Jabali estan atrapados
+		enemigos.remove(enemigo)
 		self.chequearFinDeNivel()
-		reloj.agregarTiempo()
+		//reloj.agregarTiempo()
 	}
 	// 4- Chequea si están todos los animales atrapados
 	method chequearFinDeNivel(){

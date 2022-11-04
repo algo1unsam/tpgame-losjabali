@@ -36,7 +36,6 @@ class Trampa {
 	}
 }
 
-
 object trampas{
 	const property cantidadDeTrampas = 3
 	const property trampas=[]
@@ -57,18 +56,15 @@ object trampas{
 		}
 	}
 	method restarTrampa(trampa){
-		//trampasRestantes-=1
 		colocadas.add(trampa)
 	}
 	method recojerTrampa(trampa){
-		//trampasRestantes+=1
 		colocadas.remove(trampa)
 	}
 	
 	method recojerTodas(){
 		trampas.forEach{trampa=>trampa.levantarse()}
 		colocadas.clear()
-		//trampasRestantes = self.cantidadDeTrampas()
 	}
 	
 

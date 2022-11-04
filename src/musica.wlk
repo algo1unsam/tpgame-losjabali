@@ -24,9 +24,7 @@ object musica{
 	}
 	
 	method reproducirGrito(){
-		//game.schedule(1000,{sonidoGrito.play()})
 		sonidoGrito.play()
-		//game.removeTickEvent("sonidoGrito")
 	}
 
 }

@@ -7,8 +7,6 @@ import teclado.*
 
 object guardia{
 	const property esEnemigo = false
-	var property atrapados = []
-	
 	var property position = game.center()
 	var property imagen = "assets/img/personajes/guardiaDer.png"
 	var property miraDerecha = true
@@ -57,25 +55,12 @@ object guardia{
 	// Agrega al Jabali al array de atrapados y lo remueve del mapa 
 	method atrapaAlEnemigo(enemigo){
 		if(enemigo.esEnemigo()){
-			atrapados.add(enemigo)
 			game.removeVisual(enemigo)
-			
 		}
 			
 	}
 }
- 
- 
- /* ### Próximas Features del Guardia ###
-	//Array de objetos adicionales
-	var adicionales = []
-	method recogerAdicional(adicional){
-		// Recoge una trampa o un carrito, se agrega a su lista de adicionales
-	}
-	method usarAdicional(adicional){
-		// Usar la trampa o el carrito, puede ser con la barra espaciadora, se remueve de su lista de adicionales
-	}
-*/
+
  
  
 

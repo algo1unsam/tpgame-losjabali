@@ -68,7 +68,7 @@ object vidas{
 
 class Contador{
 	
-	var property cantidadInicial = 1
+	var property cantidadInicial = 10
 	var property cantidad = cantidadInicial
 	var property posicionX = game.width()-2
 	var property posicionY = game.height()-1
@@ -139,10 +139,3 @@ object puntos inherits Contador(posicionX = game.width()/2,cantidadInicial = 0) 
 		cantidad += 20
 	}
 }
-
-
-
-
-
-
-
